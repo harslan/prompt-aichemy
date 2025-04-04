@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Alchemy Kickoff Session</title>
+    <style>
+        :root {
+            --primary: #1a4a73;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --gold: #f1c40f;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin-bottom: 30px;
+            min-height: 80vh;
+            position: relative;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        .text-gold {
+            color: var(--gold);
+        }
+        
+        .text-primary {
+            color: var(--primary);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 50px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .ai-icon { background-color: #3498db; }
+        .ce-icon { background-color: #e74c3c; }
+        .si-icon { background-color: #2ecc71; }
+        .el-icon { background-color: #9b59b6; }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--accent);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-left {
+            left: 0;
+        }
+        
+        .timeline-right {
+            left: 50%;
+        }
+        
+        .timeline-left::after {
+            right: -10px;
+        }
+        
+        .timeline-right::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-content h3 {
+            margin-top: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin: 10px 5px;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        
+        .code-block {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 20px 0;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .example {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .example h4 {
+            margin-top: 0;
+            color: var(--secondary);
+        }
+        
+        .quote {
+            font-style: italic;
+            border-left: 4px solid var(--secondary);
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        
+        .flex-container {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .flex-item {
+            flex: 1;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        
+        .data-preview {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ffeeba;
+        }
+        
+        .tip {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #c3e6cb;
+        }
+        
+        /* Navigation controls */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    
+    <div class="presentation-container">
+        <!-- Slide 1: Introduction -->
+        <div class="slide active" id="slide-1">
+            <div class="header">
+                <h1>PROMPT AICHEMY</h1>
+                <p class="subtitle">Turning Business Questions into AI Gold</p>
+                <p>Sawyer Business School Student Competition</p>
+                <p>April 4, 2025 | Kickoff Session</p>
+            </div>
+            
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h2>Welcome to Prompt Alchemy</h2>
+                    <p>Today marks the beginning of an exciting journey into the world of business intelligence through AI prompt engineering!</p>
+                    <p>In this competition, you'll master the art of crafting effective AI prompts to extract valuable insights from real-world e-commerce data from Olist, Brazil's largest online marketplace.</p>
+                    <p>Think of yourself as a conductor leading an orchestra of AI tools—your prompts are the sheet music that guides the AI to produce harmonious, valuable business insights.</p>
+                </div>
+                <div class="flex-item">
+                    <div class="card">
+                        <h3>Session Overview</h3>
+                        <ul>
+                            <li>Competition Introduction & Guidelines</li>
+                            <li>Understanding the Olist Dataset</li>
+                            <li>Prompt Engineering Fundamentals</li>
+                            <li>The AHES Framework</li>
+                            <li>Key Dates & Resources</li>
+                            <li>Q&A</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">1</div>
+        </div>
+        
+        <!-- Slide 2: The Challenge -->
+        <div class="slide" id="slide-2">
+            <h1>THE CHALLENGE</h1>
+            
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h2>Your Mission</h2>
+                    <p>Become business intelligence conductors for <span class="highlight">Olist</span>, Brazil's largest online marketplace.</p>
+                    <p>Your task: <span class="text-accent">Craft the perfect AI prompts</span> to extract transformative insights from multi-perspective data, creating harmony between AI tools and business objectives.</p>
+                    
+                    <div class="tip">
+                        <h3>Why This Matters</h3>
+                        <p>In today's business landscape, the ability to effectively direct AI tools to produce actionable insights is becoming an essential skill. You're not just learning a technical skill—you're becoming an "AI whisperer" who can translate business problems into language that AI can understand and solve.</p>
+                    </div>
+                </div>
+                <div class="flex-item">
+                    <div class="card">
+                        <h3>Success Criteria</h3>
+                        <ol>
+                            <li><strong>Business Value:</strong> Insights that drive decision-making</li>
+                            <li><strong>Clarity & Precision:</strong> Well-structured prompts</li>
+                            <li><strong>Creativity:</strong> Novel approaches to data exploration</li>
+                            <li><strong>Multi-perspective Analysis:</strong> Looking at the data from different angles</li>
+                            <li><strong>Application of AHES Framework:</strong> Demonstrating all four elements</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 20px;">
+                        <h3>Final Deliverables</h3>
+                        <ul>
+                            <li>Set of optimized AI prompts</li>
+                            <li>Presentation of insights discovered</li>
+                            <li>Explanation of prompt engineering strategy</li>
+                            <li>Documentation of AHES principles applied</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">2</div>
+        </div>
+        
+        <!-- Slide 3: Competition Timeline -->
+        <div class="slide" id="slide-3">
+            <h1>COMPETITION TIMELINE</h1>
+            
+            <div class="timeline">
+                <div class="timeline-item timeline-left">
+                    <div class="timeline-content">
+                        <h3>Kickoff Session</h3>
+                        <p><strong>Date:</strong> April 4, 2025</p>
+                        <p><strong>Time:</strong> 12:30-2:00 PM</p>
+                        <p>Introduction to competition, dataset overview, and prompt engineering fundamentals</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item timeline-right">
+                    <div class="timeline-content">
+                        <h3>Development Period</h3>
+                        <p><strong>Dates:</strong> April 4-17, 2025</p>
+                        <p>Work on your prompts and insights using the Olist dataset</p>
+                        <p>Faculty mentors available for consultation</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item timeline-left">
+                    <div class="timeline-content">
+                        <h3>Final Presentations</h3>
+                        <p><strong>Date:</strong> April 17, 2025</p>
+                        <p><strong>Time:</strong> 12:30-1:45 PM</p>
+                        <p><strong>Location:</strong> On Campus (TBD)</p>
+                        <p>Present your findings, prompt strategies, and business recommendations</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item timeline-right">
+                    <div class="timeline-content">
+                        <h3>Awards Announcement</h3>
+                        <p><strong>Date:</strong> April 17, 2025</p>
+                        <p>Winners announced immediately following presentations</p>
+                        <p>Prizes and recognition for top teams</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip" style="max-width: 800px; margin: 40px auto;">
+                <h3>Registration</h3>
+                <p>If you haven't registered yet, scan the QR code or click the registration link provided in the competition announcement. Individuals or teams of up to 3 students are welcome to participate.</p>
+            </div>
+            <div class="slide-number">3</div>
+        </div>
+        
+        <!-- Slide 4: Understanding the Olist Dataset -->
+        <div class="slide" id="slide-4">
+            <h1>UNDERSTANDING THE OLIST DATASET</h1>
+            
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h2>Dataset Overview</h2>
+                    <p>The Brazilian E-Commerce Public Dataset by Olist contains information on 100,000 orders from 2016 to 2018 made across multiple marketplaces in Brazil.</p>
+                    
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>Real commercial data (anonymized)</li>
+                        <li>Multiple dimensions: orders, products, customers, sellers, reviews</li>
+                        <li>Geographical information</li>
+                        <li>Time-series data across two years</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <h3>Data Source</h3>
+                        <p>This dataset is publicly available on Kaggle: <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank">https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce</a></p>
+                    </div>
+                </div>
+                <div class="flex-item">
+                    <h3>Data Schema</h3>
+                    <img src="https://i.imgur.com/HRhd2Y0.png" alt="Olist Data Schema" />
+                    
+                    <div class="card" style="margin-top: 20px;">
+                        <h3>Files in the Dataset</h3>
+                        <ul>
+                            <li><strong>olist_customers_dataset.csv</strong> - Customer information</li>
+                            <li><strong>olist_geolocation_dataset.csv</strong> - Geolocation data</li>
+                            <li><strong>olist_order_items_dataset.csv</strong> - Order items information</li>
+                            <li><strong>olist_order_payments_dataset.csv</strong> - Payment information</li>
+                            <li><strong>olist_order_reviews_dataset.csv</strong> - Customer reviews</li>
+                            <li><strong>olist_orders_dataset.csv</strong> - Order information</li>
+                            <li><strong>olist_products_dataset.csv</strong> - Product information</li>
+                            <li><strong>olist_sellers_dataset.csv</strong> - Seller information</li>
+                            <li><strong>product_category_name_translation.csv</strong> - Product category translations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">4</div>
+        </div>
+        
+        <!-- Slide 5: Data Exploration Opportunities -->
+        <div class="slide" id="slide-5">
+            <h1>DATA EXPLORATION OPPORTUNITIES</h1>
+            
+            <h2>Potential Business Questions to Explore</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Customer Behavior</h3>
+                    <ul>
+                        <li>What factors influence customer satisfaction?</li>
+                        <li>How do purchasing patterns vary by geography?</li>
+                        <li>What is the customer lifecycle and repurchase behavior?</li>
+                        <li>Are there identifiable customer segments?</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Sales & Performance</h3>
+                    <ul>
+                        <li>Which product categories drive the most revenue?</li>
+                        <li>How do seasonal trends affect sales?</li>
+                        <li>What are the key performance indicators for sellers?</li>
+                        <li>How does pricing strategy impact conversion?</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Logistics & Operations</h3>
+                    <ul>
+                        <li>What factors influence delivery time?</li>
+                        <li>How does shipping cost affect order frequency?</li>
+                        <li>Where are the operational bottlenecks?</li>
+                        <li>How can inventory be optimized?</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Reviews & Satisfaction</h3>
+                    <ul>
+                        <li>What themes emerge from customer reviews?</li>
+                        <li>How do reviews correlate with product categories?</li>
+                        <li>What drives negative vs. positive feedback?</li>
+                        <li>How can review sentiment predict future sales?</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="warning" style="margin-top: 30px;">
+                <h3>Remember!</h3>
+                <p>The key is not just to analyze the data, but to craft prompts that direct AI tools to extract meaningful insights that would help Olist make better business decisions. Think about the "so what?" of any analysis you conduct.</p>
+            </div>
+            <div class="slide-number">5</div>
+        </div>
+        
+        <!-- Slide 6: Prompt Engineering Fundamentals -->
+        <div class="slide" id="slide-6">
+            <h1>PROMPT ENGINEERING FUNDAMENTALS</h1>
+            
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h2>What is Prompt Engineering?</h2>
+                    <p>Prompt engineering is the strategic design of inputs to AI systems to guide them toward producing desired outputs with precision and relevance.</p>
+                    
+                    <h3>The Art & Science of Directing AI</h3>
+                    <p>Like a conductor directs musicians, effective prompts direct AI by providing:</p>
+                    <ul>
+                        <li>Clear context and background</li>
+                        <li>Specific instructions</li>
+                        <li>Desired format and tone</li>
+                        <li>Constraints and parameters</li>
+                        <li>Examples when helpful</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <h3>Why It Matters</h3>
+                        <p>The same AI model can produce dramatically different results based solely on how the prompt is engineered. Mastering this skill is about unlocking AI's potential to serve your specific business needs.</p>
+                    </div>
+                </div>
+                <div class="flex-item">
+                    <div class="card">
+                        <h3>Key Elements of Effective Prompts</h3>
+                        <ol>
+                            <li><strong>Clarity:</strong> Be specific about what you want</li>
+                            <li><strong>Context:</strong> Provide relevant background</li>
+                            <li><strong>Constraints:</strong> Define boundaries and limitations</li>
+                            <li><strong>Creativity:</strong> Allow room for AI to leverage its capabilities</li>
+                            <li><strong>Criteria:</strong> Specify how to evaluate the response</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="example" style="margin-top: 20px;">
+                        <h4>Basic vs. Advanced Prompt Structure</h4>
+                        
+                        <p><strong>Basic:</strong><br>
+                        "Analyze the Olist customer data."</p>
+                        
+                        <p><strong>Advanced:</strong><br>
+                        "As a business intelligence analyst for Olist, analyze the customer dataset to identify patterns in customer geographic distribution. Focus on the top 5 states by customer volume and visualize how customer density in these states has changed over the 2016-2018 period. Present the findings as a concise executive summary with 3 actionable recommendations for regional marketing strategy."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">6</div>
+        </div>
+        
+        <!-- Slide 7: Prompt Engineering Techniques -->
+        <div class="slide" id="slide-7">
+            <h1>PROMPT ENGINEERING TECHNIQUES</h1>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Role-Based Prompting</h3>
+                    <p>Assign a specific role to the AI to frame its perspective and expertise.</p>
+                    <div class="example">
+                        <p>"As a <span class="highlight">chief marketing officer</span> for Olist, analyze the customer review data to identify opportunities for improving customer satisfaction..."</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Chain of Thought</h3>
+                    <p>Guide the AI through a step-by-step reasoning process.</p>
+                    <div class="example">
+                        <p>"First, identify the top-selling product categories. Then, analyze the correlation between price points and sales volume within these categories. Finally, recommend optimal pricing strategies."</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Multi-perspective Analysis</h3>
+                    <p>Instruct the AI to examine data from different viewpoints.</p>
+                    <div class="example">
+                        <p>"Analyze the delivery performance data from the perspective of customers, sellers, and logistics operators to identify common pain points."</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Outcome-Focused Prompting</h3>
+                    <p>Clearly specify the desired outcome or deliverable format.</p>
+                    <div class="example">
+                        <p>"Based on the Olist order data, create a one-page executive dashboard showing monthly sales trends, top-performing categories, and regional sales distribution."</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Constraint Specification</h3>
+                    <p>Set clear boundaries and limitations for the analysis.</p>
+                    <div class="example">
+                        <p>"Analyze customer satisfaction, focusing only on orders delivered within the last 30 days of the dataset and with complete review information."</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Experimentation & Iteration</h3>
+                    <p>Refine prompts based on initial outputs to improve results.</p>
+                    <div class="example">
+                        <p>"Based on the previous analysis of customer segments, further investigate the purchasing behavior of the high-value segment, specifically looking at product category preferences."</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip" style="margin-top: 30px;">
+                <h3>Pro Tip</h3>
+                <p>For complex analyses, consider using a multi-prompt strategy—break down your investigation into sequential prompts, where each builds upon the insights from the previous one.</p>
+            </div>
+            <div class="slide-number">7</div>
+        </div>
+        
+        <!-- Slide 8: The AHES Framework -->
+        <div class="slide" id="slide-8">
+            <h1>MASTER THE AHES FRAMEWORK</h1>
+            
+            <p class="subtitle">Your Guide to Comprehensive Prompt Engineering</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon ai-icon">AI</div>
+                        <h3>AI Literacy</h3>
+                    </div>
+                    <p><em>"How does it work?"</em></p>
+                    <p>Master AI tools with deep understanding of capabilities and limitations.</p>
+                    <p><strong>Like a conductor knowing which instrument to call upon.</strong></p>
+                    
+                    <h4>Application for Olist Data:</h4>
+                    <ul>
+                        <li>Understanding what types of analyses AI can perform on e-commerce data</li>
+                        <li>Knowing when to use visualization vs. text analysis</li>
+                        <li>Recognizing limitations in causal inference</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon ce-icon">CE</div>
+                        <h3>Cognitive Elevation</h3>
+                    </div>
+                    <p><em>"What's missing or wrong?"</em></p>
+                    <p>Apply critical thinking beyond AI limitations using domain expertise.</p>
+                    <p><strong>Like a detective looking beyond obvious explanations.</strong></p>
+                    
+                    <h4>Application for Olist Data:</h4>
+                    <ul>
+                        <li>Questioning surprising trends in the data</li>
+                        <li>Identifying potential confounding variables</li>
+                        <li>Bringing in external knowledge about Brazilian e-commerce</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon si-icon">SI</div>
+                        <h3>Social Intelligence</h3>
+                    </div>
+                    <p><em>"How do we connect?"</em></p>
+                    <p>Translate technical insights into compelling business narratives.</p>
+                    <p><strong>Like a translator bridging technical and non-technical worlds.</strong></p>
+                    
+                    <h4>Application for Olist Data:</h4>
+                    <ul>
+                        <li>Crafting insights that resonate with different stakeholders</li>
+                        <li>Converting technical patterns into strategic recommendations</li>
+                        <li>Creating visualizations that tell a compelling story</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon el-icon">EL</div>
+                        <h3>Ethical Leadership</h3>
+                    </div>
+                    <p><em>"Should we do this?"</em></p>
+                    <p>Make principled decisions about AI implementation with diverse perspectives.</p>
+                    <p><strong>Like a moral compass when technology outpaces ethics.</strong></p>
+                    
+                    <h4>Application for Olist Data:</h4>
+                    <ul>
+                        <li>Considering privacy implications of customer analysis</li>
+                        <li>Ensuring fair treatment of different seller categories</li>
+                        <li>Balancing business goals with customer well-being</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tip" style="margin-top: 30px;">
+                <h3>AHES Framework in Practice</h3>
+                <p>The most effective prompt engineers incorporate all four elements of the AHES framework, creating prompts that are technically sound, critically evaluated, clearly communicated, and ethically considered.</p>
+            </div>
+            <div class="slide-number">8</div>
+        </div>
+        
+        <!-- Slide 9: Practical Prompt Examples -->
+        <div class="slide" id="slide-9">
+            <h1>PRACTICAL PROMPT EXAMPLES</h1>
+            
+            <p class="subtitle">From Basic to Advanced for Olist Data Analysis</p>
+            
+            <div class="example">
+                <h3>Basic Prompt</h3>
+                <div class="code-block">
+Analyze the Olist dataset and tell me about customer satisfaction.
+                </div>
+                <p><strong>Issues:</strong> Too vague, lacks context, no specific deliverable, no constraints</p>
+            </div>
+            
+            <div class="example">
+                <h3>Intermediate Prompt</h3>
+                <div class="code-block">
+As a customer experience analyst, review the Olist order reviews dataset. Identify the main factors that contribute to low satisfaction scores (below 3). Present your findings with specific examples.
+                </div>
+                <p><strong>Improvements:</strong> Adds role context, specifies dataset, defines clear focus, requests examples</p>
+            </div>
+            
+            <div class="example">
+                <h3>Advanced Prompt with AHES Framework</h3>
+                <div class="code-block">
+Role: As Olist's Chief Customer Officer responsible for improving customer experience across Brazil
+
+Task: Analyze the order reviews dataset in conjunction with order delivery data to identify:
+1. The correlation between delivery time and review scores
+2. Key themes in negative reviews (scores 1-2) using sentiment analysis
+3. Geographic patterns in customer satisfaction
+
+Output Format: Prepare a strategic brief with:
+- 3 key findings with supporting data visualization
+- Root cause analysis for each issue identified
+- 2-3 actionable recommendations for each finding
+- Prioritized implementation roadmap based on potential business impact
+
+Constraints:
+- Focus on data from the last 6 months in the dataset
+- Consider both seller and logistics factors
+- Acknowledge limitations in the data and any assumptions made
+
+Ethical Considerations:
+- Ensure recommendations don't unfairly impact smaller sellers
+- Consider cultural and regional factors in customer expectations
+- Prioritize sustainable long-term solutions over quick fixes
+                </div>
+                <p><strong>AHES Elements:</strong></p>
+                <ul>
+                    <li><strong>AI Literacy:</strong> Specifies appropriate data sources and analysis types</li>
+                    <li><strong>Cognitive Elevation:</strong> Requests root cause analysis beyond simple correlations</li>
+                    <li><strong>Social Intelligence:</strong> Structures output for strategic business context</li>
+                    <li><strong>Ethical Leadership:</strong> Explicitly considers fairness and sustainability</li>
+                </ul>
+            </div>
+            <div class="slide-number">9</div>
+        </div>
+        
+        <!-- Slide 10: Workshop Exercise -->
+        <div class="slide" id="slide-10">
+            <h1>WORKSHOP EXERCISE</h1>
+            
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h2>Let's Practice Together</h2>
+                    <p>We'll work through crafting an effective prompt for a specific business question using the Olist dataset.</p>
+                    
+                    <div class="card">
+                        <h3>Business Challenge</h3>
+                        <p>Olist wants to optimize its seller onboarding process by understanding what factors contribute to successful sellers on the platform.</p>
+                        
+                        <h4>Available Data:</h4>
+                        <ul>
+                            <li>Seller location and registration information</li>
+                            <li>Order and sales performance by seller</li>
+                            <li>Product categories offered by sellers</li>
+                            <li>Customer reviews linked to sellers</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip" style="margin-top: 20px;">
+                        <h3>Workshop Steps</h3>
+                        <ol>
+                            <li>Identify the key business question(s)</li>
+                            <li>Determine which data elements are most relevant</li>
+                            <li>Structure a basic prompt</li>
+                            <li>Enhance with AHES framework elements</li>
+                            <li>Review and refine as a group</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="flex-item">
+                    <div class="card">
+                        <h3>Prompt Template</h3>
+                        <div class="code-block">
+Role: 
+
+Context: 
+
+Task: 
+
+Data Focus:
+
+Analysis Approach:
+
+Output Format:
+
+Constraints:
+
+Ethical Considerations:
+                        </div>
+                    </div>
+                    
+                    <div class="warning" style="margin-top: 20px;">
+                        <h3>Tips for Effective Prompts</h3>
+                        <ul>
+                            <li>Be specific about the business objective</li>
+                            <li>Clearly identify relevant data sources</li>
+                            <li>Specify the desired analysis approach</li>
+                            <li>Define the output format and level of detail</li>
+                            <li>Consider potential biases or limitations</li>
+                            <li>Think multi-dimensionally about the problem</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">10</div>
+        </div>
+        
+        <!-- Slide 11: Competition Rules and Guidelines -->
+        <div class="slide" id="slide-11">
+            <h1>COMPETITION RULES AND GUIDELINES</h1>
+            
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h2>Participation Guidelines</h2>
+                    
+                    <div class="card">
+                        <h3>Team Structure</h3>
+                        <ul>
+                            <li>Individual or teams of up to 3 students</li>
+                            <li>All team members must be registered undergraduate or graduate business students</li>
+                            <li>Teams must register by April 8, 2025</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 20px;">
+                        <h3>Submission Requirements</h3>
+                        <ul>
+                            <li><strong>Written Report:</strong> Documentation of prompts, approach, and insights (max 5 pages)</li>
+                            <li><strong>Presentation:</strong> 5-minute pitch of key findings and recommendations</li>
+                            <li><strong>Prompt Collection:</strong> Set of optimized prompts used in your analysis</li>
+                            <li><strong>Reflection:</strong> Brief explanation of how you applied the AHES framework</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 20px;">
+                        <h3>Evaluation Criteria</h3>
+                        <ul>
+                            <li><strong>Business Value (30%):</strong> Relevance and impact of insights</li>
+                            <li><strong>Prompt Quality (30%):</strong> Effectiveness and sophistication of prompts</li>
+                            <li><strong>AHES Application (20%):</strong> Integration of framework principles</li>
+                            <li><strong>Presentation (20%):</strong> Clarity and persuasiveness of delivery</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="flex-item">
+                    <h2>Resources & Support</h2>
+                    
+                    <div class="card">
+                        <h3>Available Tools</h3>
+                        <ul>
+                            <li>Access to Olist dataset (Kaggle link provided)</li>
+                            <li>AI tools of your choice (Claude, ChatGPT, etc.)</li>
+                            <li>Visualization and analysis tools as needed</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 20px;">
+                        <h3>Faculty Support</h3>
+                        <ul>
+                            <li>Office hours with Prof. Hasan Arslan (see schedule)</li>
+                            <li>Technical support sessions for data access</li>
+                            <li>Email support for questions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="warning" style="margin-top: 20px;">
+                        <h3>Important Notes</h3>
+                        <ul>
+                            <li>Document all prompts used in your analysis</li>
+                            <li>Clearly distinguish between AI-generated insights and your own analysis</li>
+                            <li>Cite any additional data sources or references</li>
+                            <li>Final submissions due by April 16, 2025 at 11:59 PM</li>
+                            <li>Presentations will be timed—practice to ensure you stay within the allotted 5 minutes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">11</div>
+        </div>
+        
+        <!-- Slide 12: Best Practices & Tips -->
+        <div class="slide" id="slide-12">
+            <h1>BEST PRACTICES & TIPS FOR SUCCESS</h1>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Start with Exploration</h3>
+                    <p>Begin with broad, exploratory prompts to understand the dataset's potential before narrowing your focus.</p>
+                    <div class="example">
+                        <p><em>"Provide a high-level summary of the Olist dataset, highlighting interesting patterns or anomalies worth investigating further."</em></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Iterate & Refine</h3>
+                    <p>Treat prompt engineering as an iterative process—evaluate responses and adjust prompts accordingly.</p>
+                    <div class="example">
+                        <p><em>"Based on the previous analysis of delivery delays, please dive deeper into the correlation between seller location and delivery performance."</em></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Connect to Business Value</h3>
+                    <p>Always tie your analysis back to actionable business recommendations.</p>
+                    <div class="example">
+                        <p><em>"For each insight identified, provide a specific business recommendation and estimate its potential impact on customer satisfaction and revenue."</em></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Document Your Process</h3>
+                    <p>Keep a prompt journal to track what works, what doesn't, and how you've refined your approach.</p>
+                    <div class="example">
+                        <p><em>Maintain a document with prompt versions, AI responses, and your evaluation of each iteration's effectiveness.</em></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Think Multi-Dimensional</h3>
+                    <p>Examine the data from different stakeholder perspectives for a more comprehensive analysis.</p>
+                    <div class="example">
+                        <p><em>"Analyze the same issue from the perspective of customers, sellers, and Olist's business operations."</em></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Leverage Chain-of-Thought</h3>
+                    <p>Break complex analyses into sequential steps to guide the AI's reasoning process.</p>
+                    <div class="example">
+                        <p><em>"First identify high-performing sellers, then analyze their characteristics, and finally develop a profile of ideal seller attributes."</em></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip" style="margin-top: 30px;">
+                <h3>Success Mindset</h3>
+                <p>Think of yourself as an orchestrator—your role is to direct the AI's capabilities toward revealing meaningful insights, not to perform the analysis yourself. The quality of your prompts will determine the quality of the insights you uncover.</p>
+            </div>
+            <div class="slide-number">12</div>
+        </div>
+        
+        <!-- Slide 13: Q&A -->
+        <div class="slide" id="slide-13">
+            <h1>QUESTIONS & ANSWERS</h1>
+            
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h2>Common Questions</h2>
+                    
+                    <div class="card">
+                        <h3>About the Dataset</h3>
+                        <p><strong>Q: Do we need to use all the data files in the dataset?</strong></p>
+                        <p>A: No, you can focus on the specific data files that are most relevant to your chosen business questions.</p>
+                        
+                        <p><strong>Q: Can we combine the Olist data with external data sources?</strong></p>
+                        <p>A: Yes, as long as you clearly document and cite any additional data sources used.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 20px;">
+                        <h3>About the Competition</h3>
+                        <p><strong>Q: Can we change team composition after registration?</strong></p>
+                        <p>A: Team changes are allowed until April 10, 2025. Please email any changes to Prof. Hasan Arslan.</p>
+                        
+                        <p><strong>Q: Will we receive feedback on our prompts before the final presentation?</strong></p>
+                        <p>A: Yes, faculty mentors will be available for consultation during office hours to provide feedback.</p>
+                    </div>
+                </div>
+                
+                <div class="flex-item">
+                    <div class="card">
+                        <h3>About AI Tools</h3>
+                        <p><strong>Q: Which AI tool should we use?</strong></p>
+                        <p>A: You may use any AI tool of your choice. Popular options include Claude, ChatGPT, Bard, and others. You can also use multiple tools and compare results.</p>
+                        
+                        <p><strong>Q: How detailed should our documentation of prompts be?</strong></p>
+                        <p>A: Include all significant prompts used in your analysis, along with brief notes on why you structured them that way and how you refined them based on results.</p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 20px;">
+                        <h3>About Presentations</h3>
+                        <p><strong>Q: What should we focus on in our 5-minute presentation?</strong></p>
+                        <p>A: Focus on your most valuable business insights, your prompt engineering approach, and your key recommendations. Technical details can be included in your written report.</p>
+                        
+                        <p><strong>Q: Will there be time for Q&A after presentations?</strong></p>
+                        <p>A: Yes, there will be a brief 2-minute Q&A after each presentation.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip" style="margin-top: 30px; text-align: center;">
+                <h3>Additional Questions?</h3>
+                <p>If you have further questions after today's session, please feel free to email Prof. Hasan Arslan or attend the upcoming office hours.</p>
+            </div>
+            <div class="slide-number">13</div>
+        </div>
+        
+        <!-- Slide 14: Next Steps -->
+        <div class="slide" id="slide-14">
+            <h1>NEXT STEPS</h1>
+            
+            <div class="timeline">
+                <div class="timeline-item timeline-left">
+                    <div class="timeline-content">
+                        <h3>Register Your Team</h3>
+                        <p>Deadline: April 8, 2025</p>
+                        <p>Scan the QR code in the competition announcement or click the registration link</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item timeline-right">
+                    <div class="timeline-content">
+                        <h3>Access the Dataset</h3>
+                        <p>Download the Olist dataset from Kaggle</p>
+                        <p>Begin exploring the data structure and relationships</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item timeline-left">
+                    <div class="timeline-content">
+                        <h3>Develop Your Approach</h3>
+                        <p>Identify key business questions</p>
+                        <p>Start crafting and testing initial prompts</p>
+                        <p>Document your process and iterations</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item timeline-right">
+                    <div class="timeline-content">
+                        <h3>Attend Office Hours</h3>
+                        <p>Schedule available on the competition portal</p>
+                        <p>Get feedback on your approach and prompts</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item timeline-left">
+                    <div class="timeline-content">
+                        <h3>Submit Final Materials</h3>
+                        <p>Deadline: April 16, 2025 at 11:59 PM</p>
+                        <p>Submit written report, prompts, and presentation slides</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item timeline-right">
+                    <div class="timeline-content">
+                        <h3>Final Presentations</h3>
+                        <p>Date: April 17, 2025</p>
+                        <p>Time: 12:30-1:45 PM</p>
+                        <p>Location: On Campus (TBD)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn">Access Competition Portal</a>
+                <a href="#" class="btn btn-accent">Register Now</a>
+            </div>
+            <div class="slide-number">14</div>
+        </div>
+        
+        <!-- Slide 15: Closing -->
+        <div class="slide" id="slide-15">
+            <div class="header">
+                <h1>JOIN THE AI REVOLUTION</h1>
+                <p class="subtitle">Develop the essential AHES skills that distinguish exceptional business leaders in an AI-augmented world.</p>
+            </div>
+            
+            <div class="flex-container">
+                <div class="flex-item">
+                    <div class="card">
+                        <h3>Benefits of Participation</h3>
+                        <ul>
+                            <li>✨ Enhance your résumé with practical AI skills</li>
+                            <li>🤝 Network with peers and faculty</li>
+                            <li>🎓 Apply classroom knowledge to real-world data</li>
+                            <li>🏆 Compete for recognition and prizes</li>
+                            <li>💼 Develop in-demand skills for the job market</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="flex-item">
+                    <div class="quote">
+                        <p>"The most valuable skill in business is no longer just analyzing data yourself, but knowing how to direct AI tools to extract meaningful insights that drive strategic decisions."</p>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 40px;">
+                        <a href="#" class="btn btn-accent">Register Now</a>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <p>Questions? Contact Prof. Hasan Arslan</p>
+                        <p>Organized by ISOM Department & SAIL (Sawyer Business School AI Leadership) Collaborative</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">15</div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="prev-btn">Previous</button>
+            <span id="slide-counter">Slide 1 of 15</span>
+            <button class="btn" id="next-btn">Next</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const slideCounter = document.getElementById('slide-counter');
+            const progressBar = document.getElementById('progress-bar');
+            let currentSlide = 0;
+            
+            // Initialize
+            updateSlide();
+            
+            // Event listeners
+            prevBtn.addEventListener('click', function() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlide();
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    updateSlide();
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    if (currentSlide < slides.length - 1) {
+                        currentSlide++;
+                        updateSlide();
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    if (currentSlide > 0) {
+                        currentSlide--;
+                        updateSlide();
+                    }
+                }
+            });
+            
+            // Update the current slide
+            function updateSlide() {
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Show current slide
+                slides[currentSlide].classList.add('active');
+                
+                // Update counter
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+                
+                // Update progress bar
+                const progress = ((currentSlide + 1) / slides.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                
+                // Disable/enable buttons
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === slides.length - 1;
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        });
+    </script>
+</body>
+</html>
