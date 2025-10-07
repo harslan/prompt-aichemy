@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt AIChemy Competition - Fall 2025 | Suffolk University</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Join Suffolk University's AI Prompt Engineering Competition! Master the SAIL framework while extracting insights from real-world data. Open to all students. Oct 14-22, 2025.">
+    <meta name="keywords" content="AI, prompt engineering, Suffolk University, SAIL framework, competition, artificial intelligence, business education">
+    <meta name="author" content="Suffolk University - Sawyer Business School">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://harslan.github.io/PROMPT-AICHEMY/">
+    <meta property="og:title" content="Prompt AIChemy - AI Prompt Engineering Competition">
+    <meta property="og:description" content="Master AI prompt engineering and the SAIL framework. Extract insights from real-world data. Oct 14-22, 2025 at Suffolk University.">
+    <meta property="og:image" content="https://harslan.github.io/PROMPT-AICHEMY/assets/social-preview.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://harslan.github.io/PROMPT-AICHEMY/">
+    <meta property="twitter:title" content="Prompt AIChemy - AI Prompt Engineering Competition">
+    <meta property="twitter:description" content="Master AI prompt engineering and the SAIL framework. Extract insights from real-world data. Oct 14-22, 2025 at Suffolk University.">
+    <meta property="twitter:image" content="https://harslan.github.io/PROMPT-AICHEMY/assets/social-preview.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚗️</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .flyer {
+            background: white;
+            width: 100%;
+            max-width: 850px;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 50%, #3182ce 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
+        }
+
+        .header .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .header .tagline .gold {
+            color: #f6e05e;
+            font-weight: 600;
+        }
+
+        .header .subtitle {
+            font-size: 1.25rem;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .header .initiative {
+            font-size: 1.1rem;
+            margin-top: 8px;
+            opacity: 0.95;
+        }
+
+        .intro {
+            background: white;
+            padding: 30px 40px;
+            text-align: center;
+            border-bottom: 3px solid #e2e8f0;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #2d3748;
+        }
+
+        .intro .highlight {
+            color: #e53e3e;
+            font-weight: 600;
+        }
+
+        .challenge-section {
+            background: #f7fafc;
+            padding: 40px;
+        }
+
+        .challenge-box {
+            background: white;
+            border-left: 5px solid #e53e3e;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .challenge-box h2 {
+            color: #e53e3e;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .challenge-box p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #2d3748;
+        }
+
+        .challenge-box .bold {
+            font-weight: 700;
+            color: #1a202c;
+        }
+
+        .ahes-section {
+            padding: 40px;
+            background: white;
+        }
+
+        .ahes-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c5282;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ahes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .ahes-card {
+            background: #f7fafc;
+            padding: 25px;
+            border-left: 4px solid;
+            transition: transform 0.3s;
+        }
+
+        .ahes-card:hover {
+            transform: translateX(5px);
+        }
+
+        .ahes-card.si { border-left-color: #38a169; }
+        .ahes-card.ai { border-left-color: #3182ce; }
+        .ahes-card.ii { border-left-color: #e53e3e; }
+        .ahes-card.le { border-left-color: #805ad5; }
+
+        .ahes-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .ahes-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .ahes-card.si .ahes-icon { background: #38a169; }
+        .ahes-card.ai .ahes-icon { background: #3182ce; }
+        .ahes-card.ii .ahes-icon { background: #e53e3e; }
+        .ahes-card.le .ahes-icon { background: #805ad5; }
+
+        .ahes-card h3 {
+            font-size: 1.3rem;
+            color: #1a202c;
+        }
+
+        .ahes-card .question {
+            font-style: italic;
+            color: #718096;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .ahes-card p {
+            font-size: 1rem;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .ahes-card .example {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #718096;
+            line-height: 1.5;
+        }
+
+        .event-details {
+            background: #edf2f7;
+            padding: 40px;
+        }
+
+        .event-details h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c5282;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .event-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .event-card h3 {
+            font-size: 1.4rem;
+            color: #2c5282;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .event-card .date {
+            font-size: 1.1rem;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .event-card .time {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+
+        .event-card .location {
+            font-size: 0.95rem;
+            color: #718096;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 50%, #9b2c2c 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section h2 .gold {
+            color: #f6e05e;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .benefits {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .benefit {
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .benefit::before {
+            content: '✨';
+        }
+
+        .register-btn {
+            display: inline-block;
+            background: white;
+            color: #e53e3e;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .register-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .footer {
+            background: #2c5282;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 8px 0;
+            font-size: 1rem;
+        }
+
+        .footer .contact {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .ahes-grid, .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header .tagline {
+                font-size: 1.2rem;
+            }
+
+            .header .subtitle {
+                font-size: 1rem;
+            }
+
+            .benefits {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .flyer {
+                margin: 0;
+            }
+
+            .challenge-section, .ahes-section, .event-details {
+                padding: 30px 20px;
+            }
+
+            .intro {
+                padding: 25px 20px;
+            }
+
+            .cta-section {
+                padding: 40px 20px;
+            }
+
+            .register-btn {
+                padding: 15px 35px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .header {
+                padding: 40px 20px;
+            }
+
+            .ahes-card, .challenge-box, .event-card {
+                padding: 20px;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .qr-section {
+            background: #f7fafc;
+            padding: 30px;
+            text-align: center;
+            border-top: 3px solid #e2e8f0;
+        }
+
+        .qr-section h3 {
+            color: #2c5282;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .qr-section p {
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+
+        .qr-code {
+            display: inline-block;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .qr-code img {
+            width: 200px;
+            height: 200px;
+            display: block;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .flyer {
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flyer">
+        <!-- Header -->
+        <div class="header">
+            <h1>PROMPT AICHEMY</h1>
+            <p class="tagline">Turning Business Questions into <span class="gold">AI Gold</span></p>
+            <p class="subtitle">Sawyer Business School Student Competition</p>
+            <p class="initiative">A SAIL Framework Initiative</p>
+        </div>
+
+        <!-- Introduction -->
+        <div class="intro">
+            <p><span class="highlight">Open to all undergraduate and graduate students at Suffolk University!</span> Master the art of AI orchestration! Learn to direct AI tools like a conductor leads musicians, extracting powerful business insights through strategic prompt engineering. Compete individually or in teams of up to 3 students.</p>
+        </div>
+
+        <!-- Challenge -->
+        <div class="challenge-section">
+            <div class="challenge-box">
+                <h2>THE CHALLENGE</h2>
+                <p>Your mission: <span class="bold">Craft the perfect AI prompts</span> to extract transformative insights from a real-world business dataset (to be revealed to registered participants on October 14). Create harmony between AI tools and business objectives through masterful prompt engineering.</p>
+            </div>
+        </div>
+
+        <!-- AHES Framework -->
+        <div class="ahes-section">
+            <h2>Master the SAIL Framework</h2>
+            <div class="ahes-grid">
+                <div class="ahes-card si">
+                    <div class="ahes-header">
+                        <div class="ahes-icon">S</div>
+                        <h3>Social Intelligence</h3>
+                    </div>
+                    <p class="question">"How do we connect?"</p>
+                    <p>Translate technical insights into compelling business narratives.</p>
+                    <p class="example">Like a translator bridging technical and non-technical worlds.</p>
+                </div>
+
+                <div class="ahes-card ai">
+                    <div class="ahes-header">
+                        <div class="ahes-icon">A</div>
+                        <h3>AI Literacy</h3>
+                    </div>
+                    <p class="question">"How does it work?"</p>
+                    <p>Master AI tools with deep understanding of capabilities and limitations.</p>
+                    <p class="example">Like a conductor knowing which instrument to call upon.</p>
+                </div>
+
+                <div class="ahes-card ii">
+                    <div class="ahes-header">
+                        <div class="ahes-icon">I</div>
+                        <h3>Innovation/Inquiry</h3>
+                    </div>
+                    <p class="question">"What's missing or wrong?"</p>
+                    <p>Apply critical thinking beyond AI limitations using domain expertise.</p>
+                    <p class="example">Like a detective looking beyond obvious explanations.</p>
+                </div>
+
+                <div class="ahes-card le">
+                    <div class="ahes-header">
+                        <div class="ahes-icon">L</div>
+                        <h3>Leadership</h3>
+                    </div>
+                    <p class="question">"Should we do this?"</p>
+                    <p>Make principled decisions about AI implementation with diverse perspectives.</p>
+                    <p class="example">Like a moral compass when technology outpaces ethics.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Details -->
+        <div class="event-details">
+            <h2>Event Details</h2>
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-icon">📅</div>
+                    <h3>Kickoff</h3>
+                    <p class="date">October 14, 2025</p>
+                    <p class="time">Dataset & Questions Released</p>
+                    <p class="location">Work Period: Oct 14-22<br>Submit by Oct 21, 11:59 PM</p>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-icon">🏆</div>
+                    <h3>Presentations</h3>
+                    <p class="date">October 22, 2025</p>
+                    <p class="time">2:30-4:00 PM</p>
+                    <p class="location">73 Tremont, 13th Floor<br>Room 1360</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>JOIN THE <span class="gold">AI REVOLUTION</span></h2>
+            <p>Develop the essential SAIL skills that distinguish exceptional business leaders in an AI-augmented world.</p>
+            <div class="benefits">
+                <div class="benefit">Enhance your résumé</div>
+                <div class="benefit">Network with peers</div>
+                <div class="benefit">Apply classroom knowledge</div>
+            </div>
+            <a href="https://forms.gle/QSrqJYg4zw4DpRsy9" class="register-btn">Register Now</a>
+        </div>
+
+        <!-- QR Code Section -->
+        <div class="qr-section">
+            <h3>📱 Scan to Register</h3>
+            <p>Use your phone camera to scan and register instantly</p>
+            <div class="qr-code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://forms.gle/QSrqJYg4zw4DpRsy9" alt="QR Code to Registration Form">
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="contact">Questions? Contact Prof. Hasan Arslan</p>
+            <p>Organized by ISOM Department & SAIL (Sawyer AI Leadership) Collaborative</p>
+        </div>
+    </div>
+</body>
+</html>
