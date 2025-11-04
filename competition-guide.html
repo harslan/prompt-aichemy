@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt AIChemy Fall 2025 - Competition Guide</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Complete guide for Suffolk University's Prompt AIChemy Competition - Master AI prompt engineering with the SAIL framework using real Boston Airbnb data.">
+    <meta name="keywords" content="AI prompt engineering, SAIL framework, Airbnb data analysis, business intelligence, Suffolk University">
+    <meta name="author" content="Prof. Hasan Arslan - Suffolk University">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚗️</text></svg>">
+    
+    <style>
+        :root {
+            --primary-blue: #2c5282;
+            --secondary-blue: #3182ce;
+            --accent-red: #e53e3e;
+            --gold: #f6e05e;
+            --success-green: #38a169;
+            --info-blue: #3182ce;
+            --warning-orange: #dd6b20;
+            --purple: #805ad5;
+            --gray-50: #f7fafc;
+            --gray-100: #edf2f7;
+            --gray-200: #e2e8f0;
+            --gray-600: #718096;
+            --gray-700: #4a5568;
+            --gray-800: #2d3748;
+            --gray-900: #1a202c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border-bottom: 3px solid var(--accent-red);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .nav-brand .icon {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero .tagline {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .hero-meta {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-meta-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-meta-item .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .hero-meta-item .value {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: white;
+            min-height: 100vh;
+        }
+
+        /* Quick Navigation Cards */
+        .quick-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .quick-nav-card {
+            background: var(--gray-50);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 5px solid;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .quick-nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .quick-nav-card.challenge { border-left-color: var(--accent-red); }
+        .quick-nav-card.quickstart { border-left-color: var(--success-green); }
+        .quick-nav-card.sail { border-left-color: var(--secondary-blue); }
+        .quick-nav-card.resources { border-left-color: var(--purple); }
+
+        .quick-nav-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .quick-nav-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--gray-900);
+        }
+
+        .quick-nav-card p {
+            color: var(--gray-700);
+            font-size: 0.95rem;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 80px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h2 .icon {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--gray-900);
+            margin: 2rem 0 1rem 0;
+        }
+
+        h4 {
+            font-size: 1.3rem;
+            color: var(--gray-800);
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        /* Collapsible Sections */
+        .collapsible {
+            background: var(--gray-50);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-blue);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .collapsible:hover {
+            background: var(--gray-100);
+        }
+
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+        }
+
+        .collapsible-indicator {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .collapsible.active .collapsible-indicator {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            padding-top: 0;
+        }
+
+        .collapsible.active .collapsible-content {
+            max-height: 5000px;
+            padding-top: 1rem;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: white;
+            border-left: 5px solid;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .info-box.mission { border-left-color: var(--accent-red); }
+        .info-box.tip { border-left-color: var(--success-green); }
+        .info-box.warning { border-left-color: var(--warning-orange); }
+        .info-box.insight { border-left-color: var(--secondary-blue); }
+
+        .info-box .title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box .icon {
+            font-size: 1.5rem;
+        }
+
+        /* SAIL Framework Cards */
+        .sail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .sail-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            border-top: 5px solid;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .sail-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .sail-card.social { border-top-color: var(--success-green); }
+        .sail-card.ai-literacy { border-top-color: var(--secondary-blue); }
+        .sail-card.innovation { border-top-color: var(--accent-red); }
+        .sail-card.leadership { border-top-color: var(--purple); }
+
+        .sail-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .sail-card.social .sail-icon-wrapper { background: var(--success-green); }
+        .sail-card.ai-literacy .sail-icon-wrapper { background: var(--secondary-blue); }
+        .sail-card.innovation .sail-icon-wrapper { background: var(--accent-red); }
+        .sail-card.leadership .sail-icon-wrapper { background: var(--purple); }
+
+        .sail-card h4 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .sail-question {
+            font-style: italic;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .sail-example {
+            background: var(--gray-50);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--gray-700);
+        }
+
+        /* Code Blocks */
+        .prompt-example {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .prompt-example .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary-blue);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s;
+        }
+
+        .prompt-example .copy-button:hover {
+            background: var(--primary-blue);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--secondary-blue);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.3rem;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--accent-red);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--accent-red);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--accent-red);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            background: var(--gray-50);
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .question-number {
+            display: inline-block;
+            background: var(--accent-red);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .question-title {
+            font-size: 1.6rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .question-context {
+            background: var(--gray-50);
+            padding: 1rem;
+            border-left: 4px solid var(--secondary-blue);
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .think-about {
+            margin-top: 1.5rem;
+        }
+
+        .think-about h5 {
+            color: var(--purple);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .think-about ul {
+            padding-left: 1.5rem;
+        }
+
+        .think-about li {
+            margin-bottom: 0.5rem;
+            color: var(--gray-700);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent-red) 0%, #c53030 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(229, 62, 62, 0.3);
+        }
+
+        .cta-section h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--accent-red);
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Checklist */
+        .checklist {
+            background: var(--gray-50);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .checklist-item:hover {
+            background: var(--gray-100);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                justify-content: center;
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .quick-nav {
+                grid-template-columns: 1fr;
+            }
+
+            .sail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-container, .cta-section, footer {
+                display: none;
+            }
+
+            .collapsible-content {
+                max-height: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <div class="nav-brand">
+                <span class="icon">⚗️</span>
+                <span>Prompt AIChemy</span>
+            </div>
+            <div class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#challenge">The Challenge</a>
+                <a href="#sail">SAIL Framework</a>
+                <a href="#quickstart">Quick Start</a>
+                <a href="#timeline">Timeline</a>
+                <a href="#deliverables">Deliverables</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>PROMPT AICHEMY</h1>
+        <p class="tagline">Turning Business Questions into <span class="gold">AI Gold</span></p>
+        <p style="font-size: 1.3rem; margin-top: 1rem;">Your Complete Competition Guide</p>
+        
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <div class="icon">📅</div>
+                <div class="label">Competition Period</div>
+                <div class="value">Oct 21 - Nov 12, 2025</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="icon">🏆</div>
+                <div class="label">Final Presentations</div>
+                <div class="value">Nov 12, 2-3:30 PM</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="icon">📊</div>
+                <div class="label">Dataset</div>
+                <div class="value">Boston Airbnb (Live)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Quick Navigation -->
+        <div class="quick-nav">
+            <a href="#overview" class="quick-nav-card challenge">
+                <div class="icon">🎯</div>
+                <h3>The Mission</h3>
+                <p>Understand your role as an AI strategy consultant for Airbnb's Boston market</p>
+            </a>
+            <a href="#quickstart" class="quick-nav-card quickstart">
+                <div class="icon">⚡</div>
+                <h3>Quick Start</h3>
+                <p>Get started in 30 minutes with our step-by-step guide and sample prompts</p>
+            </a>
+            <a href="#sail" class="quick-nav-card sail">
+                <div class="icon">🧭</div>
+                <h3>SAIL Framework</h3>
+                <p>Master the four pillars that distinguish exceptional business leaders</p>
+            </a>
+            <a href="#resources" class="quick-nav-card resources">
+                <div class="icon">📚</div>
+                <h3>Resources</h3>
+                <p>Datasets, tools, office hours, and everything you need to succeed</p>
+            </a>
+        </div>
+
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2><span class="icon">🎯</span> Your Mission</h2>
+            
+            <div class="info-box mission">
+                <div class="title">
+                    <span class="icon">💼</span>
+                    You Are a Data Strategy Consultant
+                </div>
+                <p>You've been hired by <strong>Airbnb's Boston Market Development team</strong>. As Boston debates new short-term rental regulations, Airbnb needs strategic insights to guide their response—insights that balance business growth with community impact.</p>
+                <p style="margin-top: 1rem;"><strong>Your task:</strong> Not just to analyze data, but to <em>craft AI prompts that reveal meaningful patterns</em> and translate those patterns into strategic recommendations that serve multiple stakeholders.</p>
+                <p style="margin-top: 1rem; font-style: italic;">This is prompt engineering in action: directing AI tools to uncover insights that would otherwise remain hidden in the complexity of thousands of listings, millions of reviews, and competing interests.</p>
+            </div>
+
+            <h3>The Business Context</h3>
+            <p>Boston's short-term rental market is at a crossroads. The city is considering stricter regulations amid concerns about:</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>Housing affordability and availability for residents</li>
+                <li>Neighborhood character and community cohesion</li>
+                <li>Hotel industry competition</li>
+                <li>Tax revenue and enforcement</li>
+            </ul>
+
+            <p style="margin-top: 1.5rem;">Airbnb needs to understand their Boston market deeply to:</p>
+            <ol style="margin-left: 2rem; margin-top: 1rem;">
+                <li>Advocate effectively for balanced regulation</li>
+                <li>Support successful hosting as a legitimate income source</li>
+                <li>Improve guest experience and platform reputation</li>
+                <li>Demonstrate community value beyond just economics</li>
+            </ol>
+
+            <div class="info-box insight">
+                <div class="title">
+                    <span class="icon">💡</span>
+                    The Challenge Within the Challenge
+                </div>
+                <p>Different stakeholders have different definitions of success. Your analysis must acknowledge these competing interests and propose solutions that balance business growth with social responsibility.</p>
+            </div>
+
+            <h3>The Dataset</h3>
+            <p>You'll work with real Airbnb data from Boston (September 23, 2025), including:</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>~4,500 listings across Boston neighborhoods</li>
+                <li>Listing details: pricing, property type, amenities, location coordinates</li>
+                <li>Host information: experience level, response rates, super-host status, number of properties</li>
+                <li>Review data: ratings, review text, frequency, guest comments</li>
+                <li>Availability data: booking patterns, occupancy trends</li>
+                <li>Neighborhood mapping: geographic distribution, proximity to landmarks</li>
+            </ul>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: var(--gray-50); border-radius: 10px;">
+                <h4 style="margin-top: 0;">📦 Get the Data</h4>
+                <p style="margin-bottom: 1rem;"><strong>Dataset Access:</strong> <a href="http://insideairbnb.com/get-the-data/" target="_blank" style="color: var(--secondary-blue); font-weight: 600;">Inside Airbnb - Boston Data</a></p>
+                
+                <h5 style="color: var(--success-green); margin-top: 1rem;">Recommended Files (Start Here):</h5>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li><code>listings.csv</code> - Summary listing information (good for visualizations)</li>
+                    <li><code>reviews.csv</code> - Summary review data with ratings</li>
+                    <li><code>neighbourhoods.csv</code> - Neighborhood names for geographic analysis</li>
+                </ul>
+
+                <h5 style="color: var(--secondary-blue); margin-top: 1rem;">Optional for Deeper Analysis:</h5>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li><code>listings.csv.gz</code> - Detailed listing data (more variables)</li>
+                    <li><code>reviews.csv.gz</code> - Full review text (for sentiment analysis)</li>
+                    <li><code>calendar.csv.gz</code> - Availability and booking patterns</li>
+                    <li><code>neighbourhoods.geojson</code> - Geographic boundaries for mapping (advanced)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Challenge Questions -->
+        <section id="challenge">
+            <h2><span class="icon">🎪</span> The Three Strategic Questions</h2>
+            
+            <div class="info-box warning">
+                <div class="title">
+                    <span class="icon">⚠️</span>
+                    Critical Requirement
+                </div>
+                <p><strong>You must address ALL THREE questions</strong> in your analysis. Each question demonstrates different dimensions of AI-powered business intelligence and the SAIL framework.</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="question-card">
+                <span class="question-number">Question 1</span>
+                <div class="question-title">Host Success & Market Dynamics</div>
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--accent-red); margin-bottom: 1rem;">"What factors distinguish successful hosts from struggling ones, and how can Airbnb help more hosts succeed?"</p>
+                
+                <div class="question-context">
+                    <strong>Context:</strong> Not all hosts are created equal. Some earn significant income with high ratings and consistent bookings. Others struggle with low occupancy and mediocre reviews. Understanding what drives success can help Airbnb design better host support programs.
+                </div>
+
+                <h5 style="margin-top: 1.5rem; color: var(--primary-blue);">Your Task:</h5>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>Define what "host success" means (use multiple metrics, not just revenue)</li>
+                    <li>Identify patterns that distinguish high-performing from low-performing hosts</li>
+                    <li>Analyze whether success factors vary by property type, location, or host experience</li>
+                    <li>Develop 3-5 actionable recommendations for host success programs</li>
+                </ul>
+
+                <div class="think-about">
+                    <h5>💭 Think About:</h5>
+                    <ul>
+                        <li>Are super-hosts fundamentally different, or do they just follow a playbook?</li>
+                        <li>Does "professional" multi-property hosting outperform casual single-property hosts?</li>
+                        <li>What role do pricing strategy, communication, and amenities play?</li>
+                        <li>Are there hidden patterns in review sentiment that predict success?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-card">
+                <span class="question-number">Question 2</span>
+                <div class="question-title">Neighborhood Impact & Market Saturation</div>
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--accent-red); margin-bottom: 1rem;">"Which Boston neighborhoods show healthy market conditions vs. potential over-saturation, and what does this mean for Airbnb's growth strategy?"</p>
+                
+                <div class="question-context">
+                    <strong>Context:</strong> Airbnb faces criticism that short-term rentals harm residential neighborhoods by reducing housing availability and changing community character. Understanding neighborhood-level dynamics is critical for responsible growth.
+                </div>
+
+                <h5 style="margin-top: 1.5rem; color: var(--primary-blue);">Your Task:</h5>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>Analyze Airbnb concentration across Boston neighborhoods</li>
+                    <li>Identify patterns in pricing, listing types, and host behavior by neighborhood</li>
+                    <li>Assess whether high-density areas show signs of market saturation or degraded quality</li>
+                    <li>Determine which neighborhoods could sustainably support growth vs. which need intervention</li>
+                </ul>
+
+                <div class="think-about">
+                    <h5>💭 Think About:</h5>
+                    <ul>
+                        <li>Do tourist-heavy neighborhoods (Back Bay, North End) function differently than residential areas (Dorchester, Roslindale)?</li>
+                        <li>Are entire-home listings pushing out long-term rentals in any neighborhoods?</li>
+                        <li>How do review scores and pricing correlate with Airbnb density?</li>
+                        <li>What patterns might suggest healthy market balance vs. harmful concentration?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-card">
+                <span class="question-number">Question 3</span>
+                <div class="question-title">Guest Experience & Quality Assurance</div>
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--accent-red); margin-bottom: 1rem;">"What drives exceptional guest experiences, and how can Airbnb identify and address quality issues before they damage platform reputation?"</p>
+                
+                <div class="question-context">
+                    <strong>Context:</strong> In a competitive market, guest satisfaction determines long-term success. Airbnb needs to understand what creates great experiences and develop early warning systems for quality problems.
+                </div>
+
+                <h5 style="margin-top: 1.5rem; color: var(--primary-blue);">Your Task:</h5>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>Analyze the relationship between listing characteristics and guest satisfaction</li>
+                    <li>Identify patterns in reviews that predict future quality issues</li>
+                    <li>Develop criteria for "exceptional experience" vs. "problematic listing"</li>
+                    <li>Propose a data-driven quality monitoring system</li>
+                </ul>
+
+                <div class="think-about">
+                    <h5>💭 Think About:</h5>
+                    <ul>
+                        <li>Beyond cleanliness and location, what drives high ratings?</li>
+                        <li>Can you detect warning signs in review language before ratings drop?</li>
+                        <li>Do certain host behaviors correlate with consistent guest satisfaction?</li>
+                        <li>How should Airbnb balance strict quality control with supporting diverse listing types?</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SAIL Framework -->
+        <section id="sail">
+            <h2><span class="icon">🧭</span> The SAIL Framework in Action</h2>
+            
+            <div class="info-box insight">
+                <div class="title">
+                    <span class="icon">🎯</span>
+                    What Makes SAIL Different
+                </div>
+                <p>Your analysis should <strong>naturally demonstrate</strong> all four pillars of the SAIL framework. This isn't a checklist to force-fit—it's a way of thinking that distinguishes strategic AI users from mere tool operators.</p>
+                <p style="margin-top: 1rem; font-style: italic;">The best submissions weave these elements together seamlessly, showing how technical skill, critical thinking, communication, and ethics reinforce each other.</p>
+            </div>
+
+            <div class="sail-grid">
+                <div class="sail-card social">
+                    <div class="sail-icon-wrapper">S</div>
+                    <h4>Social Intelligence</h4>
+                    <p class="sail-question">"How do we connect?"</p>
+                    <p>Translate technical findings into clear narratives for different audiences. Your final presentation must tell a compelling story, not just present data.</p>
+                    <div class="sail-example">
+                        <strong>Like a translator</strong> bridging technical and non-technical worlds. The same insight needs completely different framing for Airbnb executives vs. city officials vs. hosts.
+                    </div>
+                    <h5 style="margin-top: 1.5rem; color: var(--success-green);">In Practice:</h5>
+                    <ul style="margin-left: 1.5rem; font-size: 0.95rem;">
+                        <li>For Airbnb executives: Strategic recommendations with business impact</li>
+                        <li>For hosts: Actionable guidance for improving performance</li>
+                        <li>For city officials: Evidence-based insights on community impact</li>
+                        <li>For guests: Quality indicators and value propositions</li>
+                    </ul>
+                </div>
+
+                <div class="sail-card ai-literacy">
+                    <div class="sail-icon-wrapper">A</div>
+                    <h4>AI Literacy</h4>
+                    <p class="sail-question">"How does it work?"</p>
+                    <p>Demonstrate sophisticated prompt engineering that shows you understand not just <em>what</em> to ask, but <em>how</em> and <em>when</em> different approaches work.</p>
+                    <div class="sail-example">
+                        <strong>Like a conductor</strong> knowing which instrument to call upon at which moment in the symphony.
+                    </div>
+                    <h5 style="margin-top: 1.5rem; color: var(--secondary-blue);">In Practice:</h5>
+                    <ul style="margin-left: 1.5rem; font-size: 0.95rem;">
+                        <li>Use role-based prompting to analyze from different perspectives</li>
+                        <li>Apply chain-of-thought reasoning for complex questions</li>
+                        <li>Leverage multi-dimensional analysis (temporal, geographic, categorical)</li>
+                        <li>Show iterative prompt refinement based on initial results</li>
+                        <li><strong>Document your prompts!</strong> We want to see your strategy.</li>
+                    </ul>
+                </div>
+
+                <div class="sail-card innovation">
+                    <div class="sail-icon-wrapper">I</div>
+                    <h4>Innovation/Inquiry</h4>
+                    <p class="sail-question">"What's missing or wrong?"</p>
+                    <p>Go beyond obvious patterns. Question surprising correlations, challenge assumptions, look for what the data doesn't show, and consider alternative explanations.</p>
+                    <div class="sail-example">
+                        <strong>Like a detective</strong> looking beyond the obvious explanations to find what's really happening.
+                    </div>
+                    <h5 style="margin-top: 1.5rem; color: var(--accent-red);">In Practice:</h5>
+                    <ul style="margin-left: 1.5rem; font-size: 0.95rem;">
+                        <li>When you find high revenue but low reviews—dig deeper</li>
+                        <li>Question whether correlation implies causation</li>
+                        <li>Identify potential biases or data limitations</li>
+                        <li>Look for what's NOT in the data that should be</li>
+                        <li>This is your "Wait, that's weird..." muscle. Use it!</li>
+                    </ul>
+                </div>
+
+                <div class="sail-card leadership">
+                    <div class="sail-icon-wrapper">L</div>
+                    <h4>Leadership</h4>
+                    <p class="sail-question">"Should we do this?"</p>
+                    <p>Address ethical dimensions proactively. Consider impacts on different stakeholder groups and recognize that data-driven doesn't mean value-neutral.</p>
+                    <div class="sail-example">
+                        <strong>Like a moral compass</strong> when technology outpaces ethics.
+                    </div>
+                    <h5 style="margin-top: 1.5rem; color: var(--purple);">In Practice:</h5>
+                    <ul style="margin-left: 1.5rem; font-size: 0.95rem;">
+                        <li>Consider impacts on hosts, guests, neighborhoods, and the city</li>
+                        <li>Acknowledge tradeoffs in your recommendations</li>
+                        <li>Think about unintended consequences</li>
+                        <li>Propose solutions that balance competing interests</li>
+                        <li>Don't just tell Airbnb what they want to hear—tell them what they need to know</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Start Guide -->
+        <section id="quickstart">
+            <h2><span class="icon">⚡</span> Quick Start Guide</h2>
+            
+            <div class="info-box tip">
+                <div class="title">
+                    <span class="icon">🎯</span>
+                    From Zero to Momentum in 30 Minutes
+                </div>
+                <p>This guide will take you from "Where do I even start?" to "I've got this!" in about an hour. Follow these steps to build confidence and establish your workflow.</p>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>Step 1: Get the Data (5 minutes)</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <ol style="margin-left: 2rem; margin-top: 1rem;">
+                        <li>Go to: <a href="http://insideairbnb.com/get-the-data/" target="_blank" style="color: var(--secondary-blue); font-weight: 600;">Inside Airbnb Data</a></li>
+                        <li>Find <strong>Boston, Massachusetts, United States</strong> (September 23, 2025)</li>
+                        <li>Download these three files to start:
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><code>listings.csv</code> (Summary information - easier to work with)</li>
+                                <li><code>reviews.csv</code> (Summary review data)</li>
+                                <li><code>neighbourhoods.csv</code> (Neighborhood names)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <div class="info-box tip" style="margin-top: 1rem;">
+                        <p><strong>Pro tip:</strong> Don't download the .gz files yet. Start with the regular .csv files—they're cleaner and easier for AI tools to process.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Having trouble downloading?</strong> Right-click the link → "Save Link As..." → Save to a dedicated folder.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>Step 2: Get to Know the Data (10 minutes)</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="margin-top: 1rem;">Open <code>listings.csv</code> in Excel or Google Sheets (or just preview it). Don't worry about analyzing yet—just look around.</p>
+                    
+                    <h5 style="margin-top: 1rem;">Things to Notice:</h5>
+                    <ul style="margin-left: 2rem;">
+                        <li>How many rows? (Each row = one Airbnb listing)</li>
+                        <li>What columns are there? (price, neighbourhood, room_type, rating, etc.)</li>
+                        <li>Any interesting patterns jump out?</li>
+                        <li>What questions pop into your head?</li>
+                    </ul>
+
+                    <p style="margin-top: 1rem;"><strong>Write down 3-5 "I wonder..." questions.</strong> These will guide your analysis.</p>
+
+                    <div style="background: var(--gray-50); padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                        <h5>Examples:</h5>
+                        <ul style="margin-left: 2rem;">
+                            <li>"I wonder why some neighborhoods have way more listings than others?"</li>
+                            <li>"I wonder if entire homes are priced differently than private rooms?"</li>
+                            <li>"I wonder what makes a 'super host' different?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>Step 3: Choose Your AI Tool (2 minutes)</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="margin-top: 1rem;">You can use any AI tool with data analysis capabilities:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li><strong>Claude</strong> (claude.ai) - Great for conversational analysis, file uploads</li>
+                        <li><strong>ChatGPT</strong> (chat.openai.com) - Excellent for data analysis, advanced models best</li>
+                        <li><strong>Google Gemini</strong> - Good alternative</li>
+                        <li><strong>Multiple tools</strong> - Feel free to compare results!</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-style: italic;">All are free or have free tiers. Use what you're comfortable with.</p>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>Step 4: Your First Prompt (10 minutes)</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="margin-top: 1rem;">Upload <code>listings.csv</code> to your chosen AI tool and try this starter prompt:</p>
+                    
+                    <div class="prompt-example">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+I'm analyzing Boston Airbnb data for a business strategy competition. 
+This dataset contains information about Airbnb listings in Boston.
+
+Please help me understand this data by:
+1. Summarizing the key variables in the dataset
+2. Identifying the top 5 neighborhoods by number of listings
+3. Showing the distribution of property types (entire home vs. private room vs. shared room)
+4. Calculating average price by property type
+5. Highlighting any interesting patterns or anomalies you notice
+
+Present your findings in a clear, structured format.
+                    </div>
+
+                    <div class="info-box tip" style="margin-top: 1rem;">
+                        <p><strong>What this does:</strong> Gets you oriented. You'll understand the data structure and start seeing patterns.</p>
+                        <p style="margin-top: 0.5rem;"><strong>What to do with the results:</strong> Read them carefully. Do the numbers make sense? What surprises you? What would you want to dig deeper on?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>Step 5: Pick Your Starting Question (3 minutes)</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="margin-top: 1rem;">Look at the three challenge questions:</p>
+                    <ol style="margin-left: 2rem;">
+                        <li>Host Success & Market Dynamics</li>
+                        <li>Neighborhood Impact & Market Saturation</li>
+                        <li>Guest Experience & Quality Assurance</li>
+                    </ol>
+                    <p style="margin-top: 1rem;"><strong>Which one interests you most? Start there.</strong> You don't have to go in order.</p>
+                    <div class="info-box tip" style="margin-top: 1rem;">
+                        <p><strong>Feeling overwhelmed?</strong> Start with Question 1 (Host Success)—it's the most straightforward entry point.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem;">Prompt Engineering Strategies</h3>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>The Role-Based Approach</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="margin-top: 1rem;"><strong>Instead of:</strong> "Analyze this data"</p>
+                    <p style="margin-top: 0.5rem;"><strong>Try:</strong></p>
+                    <div class="prompt-example">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+You are a market analyst for Airbnb. Analyze this Boston listings data 
+to identify factors that distinguish successful hosts from struggling ones. 
+Focus on patterns in pricing, ratings, reviews, and occupancy.
+                    </div>
+                    <p style="margin-top: 1rem;"><strong>Why it works:</strong> Giving AI a role provides context and frames the analysis appropriately.</p>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>The Chain-of-Thought Approach</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="margin-top: 1rem;">Instead of asking for a final answer, ask AI to think through steps:</p>
+                    <div class="prompt-example">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+Let's analyze host success in stages:
+
+Step 1: First, help me define what "successful host" means. 
+What metrics should we consider beyond just revenue?
+
+Step 2: Once we have a definition, identify which variables 
+in the dataset might correlate with success.
+
+Step 3: Analyze the top 10% of hosts by our success metric 
+versus the bottom 10%. What patterns emerge?
+
+Step 4: Based on these patterns, what actionable 
+recommendations would you make?
+                    </div>
+                    <p style="margin-top: 1rem;"><strong>Why it works:</strong> Breaks complex questions into manageable pieces and shows your reasoning process.</p>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>The Multi-Perspective Approach</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="prompt-example" style="margin-top: 1rem;">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+Analyze the concentration of Airbnb listings in Boston neighborhoods 
+from three perspectives:
+
+1. Airbnb's business perspective: Which neighborhoods offer growth opportunity?
+2. A resident's perspective: Which neighborhoods might be experiencing 
+   over-saturation affecting housing availability?
+3. A city planner's perspective: Which neighborhoods show healthy balance 
+   vs. concerning trends?
+
+For each perspective, identify 2-3 key insights and potential concerns.
+                    </div>
+                    <p style="margin-top: 1rem;"><strong>Why it works:</strong> Demonstrates social intelligence and surfaces ethical considerations naturally.</p>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>The Constraint-Focused Approach</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="prompt-example" style="margin-top: 1rem;">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+I need to identify high-quality Airbnb listings, but I want to avoid 
+common pitfalls. Analyze the relationship between ratings and other factors, 
+BUT specifically look for:
+
+1. Listings with high ratings but suspiciously few reviews 
+   (might be new or fake)
+2. Listings with high prices but mediocre ratings 
+   (might be overpriced)
+3. Super-hosts with inconsistent review patterns 
+   (what makes them inconsistent?)
+
+Help me develop a more nuanced quality metric beyond just star ratings.
+                    </div>
+                    <p style="margin-top: 1rem;"><strong>Why it works:</strong> Shows critical thinking and innovation/inquiry. You're not accepting surface-level metrics.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section id="timeline">
+            <h2><span class="icon">📅</span> Timeline & Schedule</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">October 21, 2025 (Monday)</div>
+                    <div class="timeline-content">
+                        <h4 style="margin-top: 0;">Competition Kickoff</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Challenge document released</li>
+                            <li>Dataset available for download</li>
+                            <li>Start exploring the data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">October 21-28 (Week 1)</div>
+                    <div class="timeline-content">
+                        <h4 style="margin-top: 0;">Deep Work Period</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Download and explore the Boston Airbnb dataset</li>
+                            <li>Experiment with different AI prompts</li>
+                            <li>Address all three challenge questions</li>
+                            <li>Document your most effective prompts</li>
+                            <li>Start drafting your analysis and visualizations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">October 24 (Friday)</div>
+                    <div class="timeline-content">
+                        <h4 style="margin-top: 0;">Virtual Office Hours</h4>
+                        <p><strong>Time:</strong> 2:15 PM - 3:00 PM</p>
+                        <p><strong>Zoom:</strong> <a href="https://suffolk.zoom.us/j/94936799203?from=addon" target="_blank" style="color: var(--secondary-blue);">Join Meeting</a></p>
+                        <p style="margin-top: 0.5rem; font-style: italic;">Get help with data questions, brainstorm approaches, or troubleshoot issues</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">October 29 - November 11 (Weeks 2-3)</div>
+                    <div class="timeline-content">
+                        <h4 style="margin-top: 0;">Refinement Period</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Refine your analysis and findings</li>
+                            <li>Create compelling visualizations</li>
+                            <li>Write your final report (max 5 pages)</li>
+                            <li>Design presentation slides (max 8 slides)</li>
+                            <li>Compile your prompt collection</li>
+                            <li>Practice your 5-minute presentation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">November 11, 11:59 PM (Tuesday)</div>
+                    <div class="timeline-content">
+                        <h4 style="margin-top: 0; color: var(--accent-red);">⚠️ Final Submission Deadline</h4>
+                        <p><strong>Submit all three deliverables:</strong></p>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Written report (PDF, max 5 pages)</li>
+                            <li>Presentation slides (PDF or PPTX, max 8 slides)</li>
+                            <li>Prompt collection (PDF or Word doc)</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-weight: 600;">Submission link will be provided via email</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">November 12, 2:00-3:30 PM (Wednesday)</div>
+                    <div class="timeline-content">
+                        <h4 style="margin-top: 0; color: var(--success-green);">🏆 Final Presentations</h4>
+                        <p><strong>Location:</strong> 73 Tremont Street, 12th Floor, Room 1260</p>
+                        <p style="margin-top: 0.5rem;">Present your findings (5 minutes each)</p>
+                        <p>Q&A and judging</p>
+                        <p>Awards and celebration!</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem;">Suggested Weekly Breakdown</h3>
+            
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>Week 1 (Oct 21-27): Foundation</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="margin-top: 1rem;"><strong>Day 1-2 (Oct 21-22):</strong></p>
+                    <ul style="margin-left: 2rem;">
+                        <li>Download data</li>
+                        <li>Run initial exploration</li>
+                        <li>Pick your starting question</li>
+                        <li>Draft first round of prompts</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Day 3-4 (Oct 23-24):</strong></p>
+                    <ul style="margin-left: 2rem;">
+                        <li>Deep dive on Question 1</li>
+                        <li>Start Question 2</li>
+                        <li>Document good prompts as you go</li>
+                        <li>Attend office hours if needed</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Day 5-7 (Oct 25-27):</strong></p>
+                    <ul style="margin-left: 2rem;">
+                        <li>Finish Question 2</li>
+                        <li>Address Question 3</li>
+                        <li>Start connecting insights across questions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>Week 2-3 (Oct 28 - Nov 11): Synthesis & Polish</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="margin-top: 1rem;"><strong>Days 1-5 (Oct 28 - Nov 1):</strong></p>
+                    <ul style="margin-left: 2rem;">
+                        <li>Write report draft</li>
+                        <li>Create initial visualizations</li>
+                        <li>Outline presentation</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Days 6-10 (Nov 2-6):</strong></p>
+                    <ul style="margin-left: 2rem;">
+                        <li>Refine analysis</li>
+                        <li>Polish visualizations</li>
+                        <li>Complete prompt documentation</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Days 11-14 (Nov 7-11):</strong></p>
+                    <ul style="margin-left: 2rem;">
+                        <li>Final report polish</li>
+                        <li>Finalize presentation slides</li>
+                        <li>Practice your pitch</li>
+                        <li>Submit by 11:59 PM on Nov 11</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deliverables -->
+        <section id="deliverables">
+            <h2><span class="icon">📋</span> Deliverables & Evaluation</h2>
+            
+            <h3>What You'll Submit</h3>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>1. Written Report (Maximum 5 pages)</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div style="margin-top: 1rem;">
+                        <h4>Executive Summary (0.5 pages)</h4>
+                        <ul style="margin-left: 2rem;">
+                            <li>Key findings in 3-5 bullet points</li>
+                            <li>Primary strategic recommendation</li>
+                            <li>Expected business impact</li>
+                        </ul>
+
+                        <h4 style="margin-top: 1.5rem;">Analysis & Findings (3 pages)</h4>
+                        <ul style="margin-left: 2rem;">
+                            <li>Address all three challenge questions</li>
+                            <li>Include 2-4 data visualizations</li>
+                            <li>Provide specific evidence for claims</li>
+                            <li>Show your reasoning process</li>
+                        </ul>
+
+                        <h4 style="margin-top: 1.5rem;">Prompt Engineering Strategy (1 page)</h4>
+                        <ul style="margin-left: 2rem;">
+                            <li>Document your key prompts (3-5 examples)</li>
+                            <li>Explain your prompt development approach</li>
+                            <li>Describe how you applied SAIL framework</li>
+                            <li>Reflect on what worked and what didn't</li>
+                        </ul>
+
+                        <h4 style="margin-top: 1.5rem;">Recommendations & Implementation (0.5 pages)</h4>
+                        <ul style="margin-left: 2rem;">
+                            <li>3-5 prioritized strategic recommendations</li>
+                            <li>Implementation considerations</li>
+                            <li>Success metrics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>2. Presentation Slides (Maximum 8 slides)</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="margin-top: 1rem;">Prepare a <strong>5-minute presentation</strong> covering:</p>
+                    <ol style="margin-left: 2rem; margin-top: 1rem;">
+                        <li>Executive summary of key insights</li>
+                        <li>Most compelling findings from each question</li>
+                        <li>Strategic recommendations with supporting evidence</li>
+                        <li>Your prompt engineering approach (briefly)</li>
+                    </ol>
+                    <div class="info-box tip" style="margin-top: 1rem;">
+                        <p><strong>Format:</strong> PDF or PowerPoint</p>
+                        <p><strong>Design:</strong> Clear, professional, visually engaging</p>
+                        <p><strong>Remember:</strong> You're telling a story, not just showing data</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span>3. Prompt Collection</span>
+                    <span class="collapsible-indicator">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="margin-top: 1rem;">Submit a separate document with:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li>Your 5-10 most effective prompts</li>
+                        <li>Brief notes on what each prompt was designed to reveal</li>
+                        <li>Examples of prompt iteration/refinement</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">This shows us your strategic thinking about AI orchestration.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem;">How You'll Be Evaluated</h3>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div class="info-box mission">
+                    <div class="title">Business Value (30%)</div>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem; font-size: 0.95rem;">
+                        <li>Relevance and actionability of insights</li>
+                        <li>Strategic thinking and prioritization</li>
+                        <li>Clear connection to business objectives</li>
+                        <li>Potential impact of recommendations</li>
+                    </ul>
+                </div>
+
+                <div class="info-box insight">
+                    <div class="title">Prompt Engineering (30%)</div>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem; font-size: 0.95rem;">
+                        <li>Sophistication and effectiveness of prompts</li>
+                        <li>Strategic approach to prompt design</li>
+                        <li>Clear demonstration of AI literacy</li>
+                        <li>Iterative refinement and learning</li>
+                    </ul>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="title">SAIL Framework (20%)</div>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem; font-size: 0.95rem;">
+                        <li>Evidence of all four SAIL pillars</li>
+                        <li>Natural integration (not forced)</li>
+                        <li>Depth of critical thinking</li>
+                        <li>Ethical consideration and nuance</li>
+                    </ul>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="title">Presentation (20%)</div>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem; font-size: 0.95rem;">
+                        <li>Clarity and persuasiveness of delivery</li>
+                        <li>Visual communication effectiveness</li>
+                        <li>Storytelling and narrative structure</li>
+                        <li>Professional polish</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section id="resources">
+            <h2><span class="icon">📚</span> Resources & Support</h2>
+            
+            <h3>Dataset & Tools</h3>
+            <div style="background: var(--gray-50); padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                <h4 style="margin-top: 0;">📊 Data Source</h4>
+                <p><a href="http://insideairbnb.com/get-the-data/" target="_blank" style="color: var(--secondary-blue); font-weight: 600; font-size: 1.1rem;">Inside Airbnb - Boston Data (September 23, 2025)</a></p>
+                <p style="margin-top: 0.5rem; font-size: 0.95rem;"><a href="http://insideairbnb.com/about/" target="_blank" style="color: var(--gray-700);">About Inside Airbnb & Methodology</a></p>
+
+                <h4 style="margin-top: 1.5rem;">🤖 Recommended AI Tools</h4>
+                <ul style="margin-left: 2rem;">
+                    <li><strong>Claude</strong> (claude.ai) - Excellent for conversational analysis</li>
+                    <li><strong>ChatGPT</strong> (chat.openai.com) - Strong data analysis capabilities</li>
+                    <li><strong>Google Gemini</strong> - Good alternative option</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem;">📖 Additional Resources</h4>
+                <ul style="margin-left: 2rem;">
+                    <li><a href="https://sites.suffolk.edu/sail/" target="_blank" style="color: var(--secondary-blue);">SAIL Framework Overview</a></li>
+                    <li><a href="https://harslan.github.io/prompt-aichemy/" target="_blank" style="color: var(--secondary-blue);">Competition Website</a></li>
+                    <li>Boston neighborhood guide (to be provided)</li>
+                </ul>
+            </div>
+
+            <h3>Office Hours & Support</h3>
+            <div style="background: var(--gray-50); padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                <h4 style="margin-top: 0;">👨‍🏫 Professor Hasan Arslan</h4>
+                <p><strong>Email:</strong> <a href="mailto:harslan@suffolk.edu" style="color: var(--secondary-blue); font-weight: 600;">harslan@suffolk.edu</a></p>
+                
+                <h5 style="margin-top: 1rem; color: var(--accent-red);">Virtual Office Hours:</h5>
+                <p><strong>Friday, October 24, 2025</strong></p>
+                <p><strong>Time:</strong> 2:15 PM - 3:00 PM</p>
+                <p><strong>Zoom Link:</strong> <a href="https://suffolk.zoom.us/j/94936799203?from=addon" target="_blank" style="color: var(--secondary-blue);">Join Meeting</a></p>
+
+                <div class="info-box tip" style="margin-top: 1rem;">
+                    <p><strong>Don't hesitate to reach out!</strong> Whether you have a technical question about the data, want feedback on your approach, or just need to talk through your thinking—that's what office hours are for.</p>
+                </div>
+            </div>
+
+            <h3>Tips for Success</h3>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem; color: var(--success-green);">✓</span>
+                    <span><strong>Start early, refine often:</strong> Your first prompts won't be your best prompts</span>
+                </div>
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem; color: var(--success-green);">✓</span>
+                    <span><strong>Focus on prompt engineering, not programming:</strong> You're directing AI, not coding from scratch</span>
+                </div>
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem; color: var(--success-green);">✓</span>
+                    <span><strong>Address all three questions:</strong> You can go deeper on some, but don't skip any</span>
+                </div>
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem; color: var(--success-green);">✓</span>
+                    <span><strong>Ethics aren't extra credit:</strong> Consider impacts on all stakeholders naturally</span>
+                </div>
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem; color: var(--success-green);">✓</span>
+                    <span><strong>Tell a story, not just data:</strong> Your presentation should be compelling, not just informative</span>
+                </div>
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem; color: var(--success-green);">✓</span>
+                    <span><strong>Question your findings:</strong> Use your "Wait, that's weird..." muscle</span>
+                </div>
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem; color: var(--success-green);">✓</span>
+                    <span><strong>Document your prompts:</strong> Save effective prompts as you discover them</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <div class="cta-section">
+            <h3>Ready to Turn Data Into Gold? ⚗️</h3>
+            <p style="margin-top: 1rem; font-size: 1.1rem;">This competition isn't just about winning—it's about developing skills that will distinguish you throughout your career: strategic AI orchestration, critical thinking, effective communication, and ethical leadership.</p>
+            <p style="margin-top: 1rem; font-size: 1.1rem;">The best submissions won't just showcase technical skill—they'll demonstrate the wisdom to use that skill responsibly.</p>
+            <a href="https://forms.gle/QSrqJYg4zw4DpRsy9" class="cta-button" target="_blank">Register Now</a>
+            <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.9;">Already registered? Download the data and start exploring!</p>
+        </div>
+
+        <!-- Final Checklist -->
+        <section>
+            <h2><span class="icon">✅</span> Submission Checklist</h2>
+            <p style="margin-bottom: 2rem;">Before you submit on November 11 at 11:59 PM, make sure you have:</p>
+            
+            <div class="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">Addressed all three challenge questions</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">Included 2-4 data visualizations in report</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">Documented 5-10 of your key prompts</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">Connected findings to business recommendations</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">Considered ethical implications and stakeholder impacts</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">Created 8-slide presentation deck (max)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">Practiced your 5-minute presentation</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">Proofread everything (typos happen when rushing!)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check9">
+                    <label for="check9">Report is max 5 pages (PDF format)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check10">
+                    <label for="check10">All files named clearly (lastname_reportname.pdf)</label>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h3 style="color: white; margin-bottom: 1rem;">Questions? We're Here to Help!</h3>
+        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">
+            <strong>Prof. Hasan Arslan</strong><br>
+            <a href="mailto:harslan@suffolk.edu">harslan@suffolk.edu</a>
+        </p>
+        <p style="margin-top: 2rem; opacity: 0.9;">
+            Organized by ISOM Department & SAIL (Sawyer AI Leadership) Collaborative<br>
+            Suffolk University - Sawyer Business School
+        </p>
+        <p style="margin-top: 2rem; font-size: 0.9rem;">
+            <a href="https://harslan.github.io/prompt-aichemy/" target="_blank">Competition Website</a> | 
+            <a href="https://sites.suffolk.edu/sail/" target="_blank">SAIL Framework</a> | 
+            <a href="https://forms.gle/QSrqJYg4zw4DpRsy9" target="_blank">Register</a>
+        </p>
+    </footer>
+
+    <script>
+        // Collapsible functionality
+        document.querySelectorAll('.collapsible').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        // Copy prompt functionality
+        function copyPrompt(button) {
+            const promptText = button.parentElement.textContent
+                .replace('Copy', '')
+                .trim();
+            
+            navigator.clipboard.writeText(promptText).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
