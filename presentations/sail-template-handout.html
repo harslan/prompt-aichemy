@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAIL-Based Competition Design Template</title>
+    <style>
+        @page {
+            size: letter;
+            margin: 0.5in;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 11pt;
+            line-height: 1.4;
+            color: #2d3748;
+            padding: 20px;
+            max-width: 8.5in;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c5282;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #2c5282;
+            font-size: 20pt;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            color: #718096;
+            font-size: 11pt;
+            font-style: italic;
+        }
+
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section h2 {
+            color: #2c5282;
+            font-size: 13pt;
+            margin-bottom: 8px;
+            border-left: 4px solid #e53e3e;
+            padding-left: 10px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .template-box {
+            background: #f7fafc;
+            border: 2px solid #2c5282;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 9pt;
+            line-height: 1.5;
+        }
+
+        .template-box strong {
+            color: #2c5282;
+        }
+
+        .principle {
+            background: #f7fafc;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-left: 4px solid #38a169;
+            border-radius: 3px;
+        }
+
+        .principle strong {
+            color: #2c5282;
+        }
+
+        .sail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .sail-mini {
+            background: white;
+            border-top: 3px solid;
+            padding: 8px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .sail-mini.s { border-top-color: #38a169; }
+        .sail-mini.a { border-top-color: #3182ce; }
+        .sail-mini.i { border-top-color: #e53e3e; }
+        .sail-mini.l { border-top-color: #805ad5; }
+
+        .sail-mini strong {
+            font-size: 10pt;
+            color: #2c5282;
+        }
+
+        .sail-mini .question {
+            font-style: italic;
+            font-size: 8pt;
+            color: #718096;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        li {
+            margin-bottom: 4px;
+            font-size: 10pt;
+        }
+
+        .example-box {
+            background: #edf2f7;
+            border-left: 3px solid #3182ce;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 3px;
+        }
+
+        .example-box strong {
+            color: #2c5282;
+            font-size: 10pt;
+        }
+
+        .footer {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            font-size: 9pt;
+            color: #718096;
+        }
+
+        .footer a {
+            color: #3182ce;
+            text-decoration: none;
+        }
+
+        .highlight {
+            background: #fef5e7;
+            padding: 10px;
+            border-left: 4px solid #f6e05e;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+
+        .highlight strong {
+            color: #d69e2e;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SAIL-Based Competition Design Template</h1>
+        <p class="subtitle">Designing AI-Enabled Learning Experiences That Develop Strategic Judgment</p>
+        <p class="subtitle">SAIL Fridays • November 14, 2025 • Prof. Hasan Arslan</p>
+    </div>
+
+    <div class="section">
+        <h2>The Core Template</h2>
+        <div class="template-box">
+<strong>Title:</strong> [Your Domain] AIChemy
+
+<strong>Dataset:</strong> Real, complex, current data from your domain
+<strong>Role:</strong> "You are a [professional consultant] hired by [organization]..."
+
+<strong>Question 1 - Technical/Analytical:</strong> 
+What patterns distinguish X from Y? (e.g., successful vs. struggling, high-performing vs. low-performing)
+
+<strong>Question 2 - Strategic/Systemic:</strong>
+Which [segments/markets/areas] show healthy conditions vs. concerning trends? What are growth implications?
+
+<strong>Question 3 - Ethical/Stakeholder:</strong>
+What drives [quality/satisfaction/outcomes], and how do we balance competing interests?
+
+<strong>Deliverables:</strong> Report + Presentation + Prompt Documentation
+<strong>Assessment:</strong> Business value + Prompt quality + SAIL integration + Communication
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Four Design Principles</h2>
+        <div class="principle">
+            <strong>1. Authentic Complexity:</strong> Use real data with real stakeholders and real ethical tensions. Students can't optimize for one metric—they must navigate complexity (like real business).
+        </div>
+        <div class="principle">
+            <strong>2. Role-Based Framing:</strong> Students aren't "doing a project"—they're consultants. This shifts mindset from "what does professor want?" to "what does client need?"
+        </div>
+        <div class="principle">
+            <strong>3. Structured Ambiguity:</strong> Clear requirements (address all questions, document prompts), but multiple paths to excellence. Grade reasoning, not "right answers."
+        </div>
+        <div class="principle">
+            <strong>4. SAIL Integration:</strong> Don't force SAIL as a checklist—design experiences where all four pillars emerge naturally from doing good work.
+        </div>
+    </div>
+
+    <div class="two-column">
+        <div>
+            <div class="section">
+                <h2>SAIL Framework Quick Reference</h2>
+                <div class="sail-grid">
+                    <div class="sail-mini s">
+                        <strong>S - Social Intelligence</strong>
+                        <p class="question">"How do we connect?"</p>
+                        <p style="font-size: 8pt;">Translate technical insights for diverse audiences</p>
+                    </div>
+                    <div class="sail-mini a">
+                        <strong>A - AI Literacy</strong>
+                        <p class="question">"How does it work?"</p>
+                        <p style="font-size: 8pt;">Strategic AI tool direction & understanding</p>
+                    </div>
+                    <div class="sail-mini i">
+                        <strong>I - Innovation/Inquiry</strong>
+                        <p class="question">"What's wrong/missing?"</p>
+                        <p style="font-size: 8pt;">Critical thinking beyond AI limitations</p>
+                    </div>
+                    <div class="sail-mini l">
+                        <strong>L - Leadership</strong>
+                        <p class="question">"Should we do this?"</p>
+                        <p style="font-size: 8pt;">Ethical decisions about AI implementation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="section">
+                <h2>Assessment Rubric</h2>
+                <ul>
+                    <li><strong>Business Value (30%):</strong> Actionability, strategic thinking, impact</li>
+                    <li><strong>Prompt Engineering (30%):</strong> Sophistication, iteration, strategic approach</li>
+                    <li><strong>SAIL Framework (20%):</strong> Natural integration of all four pillars</li>
+                    <li><strong>Presentation (20%):</strong> Clarity, storytelling, visual communication</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Domain-Specific Examples</h2>
+        <div class="example-box">
+            <strong>Finance - Portfolio AIChemy:</strong> Consultant for university endowment analyzing 20 years of returns. Q1: What distinguishes resilient portfolios? Q2: When do correlations break? Q3: How to balance returns with ESG?
+        </div>
+        <div class="example-box">
+            <strong>Marketing - Brand AIChemy:</strong> Brand strategist for Boston business with social media + sales data. Q1: What drives conversion vs. awareness? Q2: What are behavioral tribes? Q3: How to use AI without losing authenticity?
+        </div>
+        <div class="example-box">
+            <strong>Accounting - Audit AIChemy:</strong> Audit consultant with transaction data. Q1: What patterns suggest fraud vs. errors? Q2: Where should auditors focus time? Q3: What requires human vs. AI judgment?
+        </div>
+    </div>
+
+    <div class="highlight">
+        <strong>Key Insight:</strong> All examples share real data complexity, multiple stakeholder perspectives, ethical tensions, and communication challenges across audiences. The template works because it creates conditions where SAIL pillars emerge naturally from doing good work.
+    </div>
+
+    <div class="footer">
+        <p><strong>Resources:</strong> Competition Guide: <a href="https://harslan.github.io/prompt-aichemy/">harslan.github.io/prompt-aichemy</a> • 
+        SAIL Framework: <a href="https://sites.suffolk.edu/sail/">sites.suffolk.edu/sail</a> • 
+        AACSB Article: <a href="https://www.aacsb.edu/insights/articles/2025/10/beyond-the-hype-ais-role-in-business-education">tinyurl.com/sail-aacsb</a></p>
+        <p style="margin-top: 5px;"><strong>Contact:</strong> Prof. Hasan Arslan • harslan@suffolk.edu • Chief AI Officer, Sawyer Business School</p>
+    </div>
+</body>
+</html>

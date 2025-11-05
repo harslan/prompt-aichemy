@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAIL Fridays Kickoff: From Framework to Practice</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
+    
+    <style>
+        :root {
+            --sail-blue: #2c5282;
+            --sail-red: #e53e3e;
+            --sail-green: #38a169;
+            --sail-purple: #805ad5;
+            --sail-gold: #f6e05e;
+            --sail-light: #f7fafc;
+        }
+
+        .reveal {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            color: var(--sail-blue);
+            text-transform: none;
+            font-weight: 700;
+        }
+
+        .reveal h1 {
+            font-size: clamp(1.8em, 5vw, 2.5em);
+            line-height: 1.2;
+        }
+
+        .reveal h2 {
+            font-size: clamp(1.3em, 4vw, 1.8em);
+            margin-bottom: 0.5em;
+        }
+
+        .reveal h3 {
+            font-size: clamp(1.1em, 3vw, 1.4em);
+        }
+
+        .reveal h4 {
+            font-size: clamp(1em, 2.5vw, 1.2em);
+        }
+
+        .reveal p, .reveal li {
+            font-size: clamp(0.85em, 2vw, 1em);
+        }
+
+        /* Title Slide */
+        .title-slide {
+            background: linear-gradient(135deg, var(--sail-blue) 0%, #3182ce 100%);
+            color: white !important;
+        }
+
+        .title-slide h1,
+        .title-slide h2,
+        .title-slide h3,
+        .title-slide p {
+            color: white !important;
+        }
+
+        .title-slide .subtitle {
+            font-size: 1.3em;
+            font-style: italic;
+            margin-top: 1em;
+            opacity: 0.95;
+        }
+
+        .title-slide .author {
+            margin-top: 2em;
+            font-size: 1.1em;
+        }
+
+        .title-slide .date {
+            margin-top: 0.5em;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* SAIL Pillars */
+        .sail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .sail-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+        }
+
+        .sail-card {
+            background: white;
+            padding: clamp(1rem, 3vw, 1.5rem);
+            border-radius: 10px;
+            border-top: 5px solid;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            text-align: left;
+        }
+
+        .sail-card.social { border-top-color: var(--sail-green); }
+        .sail-card.ai { border-top-color: #3182ce; }
+        .sail-card.innovation { border-top-color: var(--sail-red); }
+        .sail-card.leadership { border-top-color: var(--sail-purple); }
+
+        .sail-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sail-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .sail-card.social .sail-icon { background: var(--sail-green); }
+        .sail-card.ai .sail-icon { background: #3182ce; }
+        .sail-card.innovation .sail-icon { background: var(--sail-red); }
+        .sail-card.leadership .sail-icon { background: var(--sail-purple); }
+
+        .sail-question {
+            font-style: italic;
+            color: #718096;
+            font-size: 0.95em;
+            margin-bottom: 0.5em;
+        }
+
+        /* Stats Display */
+        .stat-box {
+            background: var(--sail-light);
+            padding: clamp(1rem, 3vw, 2rem);
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 5px solid var(--sail-red);
+        }
+
+        .stat-number {
+            font-size: clamp(2em, 8vw, 3em);
+            font-weight: bold;
+            color: var(--sail-red);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: clamp(0.95em, 2.5vw, 1.2em);
+            color: var(--sail-blue);
+            margin-top: 0.5em;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: var(--sail-light);
+            padding: clamp(1rem, 2.5vw, 1.5rem);
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 5px solid;
+        }
+
+        .highlight-box.insight { border-left-color: #3182ce; }
+        .highlight-box.warning { border-left-color: var(--sail-red); }
+        .highlight-box.success { border-left-color: var(--sail-green); }
+        .highlight-box.tip { border-left-color: var(--sail-purple); }
+
+        .highlight-box strong {
+            color: var(--sail-blue);
+        }
+
+        .highlight-box p, .highlight-box ul {
+            font-size: clamp(0.85em, 2vw, 1em);
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        /* Lists */
+        .reveal ul, .reveal ol {
+            margin-left: 0;
+            padding-left: 1.5em;
+        }
+
+        .reveal ul li, .reveal ol li {
+            margin-bottom: 0.6em;
+            font-size: clamp(0.8em, 2vw, 0.9em);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .reveal ul, .reveal ol {
+                padding-left: 1em;
+            }
+        }
+
+        /* Emphasis */
+        .emphasis {
+            color: var(--sail-red);
+            font-weight: 600;
+        }
+
+        .gold {
+            color: #d69e2e;
+            font-weight: 600;
+        }
+
+        /* Design Principles */
+        .principle-card {
+            background: white;
+            padding: clamp(1rem, 2.5vw, 1.5rem);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 1rem 0;
+            border-left: 5px solid var(--sail-blue);
+        }
+
+        .principle-number {
+            background: var(--sail-blue);
+            color: white;
+            width: clamp(30px, 5vw, 35px);
+            height: clamp(30px, 5vw, 35px);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            font-size: clamp(0.9em, 2vw, 1em);
+        }
+
+        .principle-title {
+            font-size: clamp(1.1em, 2.5vw, 1.3em);
+            font-weight: 600;
+            color: var(--sail-blue);
+            margin-bottom: 0.5em;
+        }
+
+        .principle-card p, .principle-card ul {
+            font-size: clamp(0.85em, 2vw, 1em);
+        }
+
+        /* Domain Examples */
+        .domain-card {
+            background: linear-gradient(135deg, var(--sail-light) 0%, white 100%);
+            padding: clamp(1rem, 2.5vw, 1.5rem);
+            border-radius: 10px;
+            border-top: 4px solid var(--sail-blue);
+            margin: 1rem 0;
+        }
+
+        .domain-card h4 {
+            color: var(--sail-red);
+            margin-bottom: 0.5em;
+            font-size: clamp(1em, 2.5vw, 1.2em);
+        }
+
+        .domain-card p {
+            font-size: clamp(0.85em, 2vw, 1em);
+        }
+
+        .domain-card .role {
+            font-weight: 600;
+            color: var(--sail-blue);
+        }
+
+        /* Quote Styling */
+        .reveal blockquote {
+            background: var(--sail-light);
+            border-left: 5px solid var(--sail-blue);
+            padding: clamp(1rem, 2.5vw, 1.5rem);
+            margin: 1rem 0;
+            font-style: italic;
+            color: #2d3748;
+            box-shadow: none;
+            font-size: clamp(0.85em, 2vw, 0.95em);
+        }
+
+        .reveal blockquote cite {
+            display: block;
+            margin-top: 1rem;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--sail-blue);
+            font-size: clamp(0.8em, 1.8vw, 0.9em);
+        }
+
+        /* Footer */
+        .reveal .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 0.6em;
+            color: #718096;
+        }
+
+        /* Fragment styling */
+        .reveal .fragment.highlight-current-red.visible {
+            color: var(--sail-red);
+        }
+
+        /* Template Box */
+        .template-box {
+            background: #f7fafc;
+            border: 2px dashed var(--sail-blue);
+            padding: clamp(1rem, 2.5vw, 1.5rem);
+            border-radius: 10px;
+            font-size: clamp(0.75em, 1.8vw, 0.85em);
+            text-align: left;
+            font-family: 'Monaco', 'Menlo', monospace;
+            line-height: 1.5;
+        }
+
+        /* Call to Action */
+        .cta-box {
+            background: linear-gradient(135deg, var(--sail-red) 0%, #c53030 100%);
+            color: white;
+            padding: clamp(1rem, 3vw, 2rem);
+            border-radius: 15px;
+            margin: 1.5rem 0;
+        }
+
+        .cta-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: clamp(1.2em, 3vw, 1.6em);
+        }
+
+        .cta-box p {
+            font-size: clamp(0.95em, 2.2vw, 1.2em);
+        }
+
+        /* Image containers */
+        .reveal img {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 8px;
+        }
+
+        /* Section headers */
+        .section-slide {
+            background: linear-gradient(135deg, var(--sail-blue) 0%, #3182ce 100%);
+            color: white !important;
+        }
+
+        .section-slide h2 {
+            color: white !important;
+            font-size: 2.5em;
+        }
+
+        /* Custom bullets */
+        .reveal ul.checkmark li::before {
+            content: "✓ ";
+            color: var(--sail-green);
+            font-weight: bold;
+            margin-right: 0.5em;
+        }
+
+        .reveal ul.checkmark li {
+            list-style: none;
+        }
+
+        /* Progress bar custom color */
+        .reveal .progress {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .reveal .progress span {
+            background: var(--sail-red);
+        }
+
+        /* Small text */
+        .small-text {
+            font-size: 0.7em;
+            color: #718096;
+        }
+
+        /* Centered content */
+        .centered {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Evidence badge */
+        .evidence-badge {
+            display: inline-block;
+            background: var(--sail-green);
+            color: white;
+            padding: 0.3em 0.8em;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 0.5em;
+        }
+
+        /* Workshop prompt */
+        .workshop-prompt {
+            background: linear-gradient(135deg, var(--sail-purple) 0%, #6b46c1 100%);
+            color: white;
+            padding: clamp(1rem, 3vw, 2rem);
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            font-size: clamp(0.95em, 2.2vw, 1.1em);
+        }
+
+        .workshop-prompt strong {
+            color: var(--sail-gold);
+        }
+
+        .workshop-prompt ul {
+            margin-top: 0.5em;
+            font-size: clamp(0.85em, 2vw, 0.95em);
+        }
+
+        .workshop-prompt p {
+            font-size: clamp(0.95em, 2.2vw, 1.2em);
+        }
+
+        /* Additional Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .reveal .slides {
+                padding: 1rem;
+            }
+            
+            .sail-grid, .two-column {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title-slide h1 {
+                font-size: clamp(1.5em, 6vw, 2em) !important;
+            }
+
+            .title-slide .subtitle {
+                font-size: clamp(0.9em, 3vw, 1.1em) !important;
+            }
+
+            .title-slide .author p {
+                font-size: clamp(0.85em, 2.5vw, 1em) !important;
+            }
+
+            .section-slide h2 {
+                font-size: clamp(1.5em, 5vw, 2em) !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .reveal .slides {
+                padding: 0.5rem;
+            }
+
+            .sail-card h3 {
+                font-size: clamp(1em, 3.5vw, 1.2em);
+            }
+
+            .principle-number {
+                width: 28px;
+                height: 28px;
+                font-size: 0.85em;
+            }
+
+            .domain-card,
+            .principle-card,
+            .highlight-box {
+                padding: 0.8rem;
+            }
+        }
+
+        /* Ensure content doesn't overflow */
+        .reveal .slides section {
+            overflow-y: auto;
+            max-height: 100vh;
+            padding: 1rem;
+        }
+
+        .reveal .slides section * {
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Title Slide -->
+            <section class="title-slide" data-background-gradient="linear-gradient(135deg, #2c5282 0%, #3182ce 100%)">
+                <h1>From Framework to Practice</h1>
+                <p class="subtitle">Designing AI-Enabled Learning Experiences with SAIL</p>
+                <p class="subtitle" style="font-size: 1em; margin-top: 1.5em;">How Prompt AIChemy Demonstrates All Four SAIL Pillars in Action</p>
+                <div class="author">
+                    <p><strong>Prof. Hasan Arslan</strong></p>
+                    <p>Chief AI Officer & Associate Professor<br>
+                    Sawyer Business School, Suffolk University</p>
+                </div>
+                <div class="date">
+                    <p>SAIL Fridays Kickoff • November 14, 2025</p>
+                </div>
+            </section>
+
+            <!-- The Challenge -->
+            <section>
+                <h2>The Challenge We Face</h2>
+                <div class="stat-box">
+                    <div class="stat-number">644%</div>
+                    <div class="stat-label">Increase in job postings requiring generative AI skills since ChatGPT launched</div>
+                    <p class="small-text" style="margin-top: 1em;">Source: Educational Advisory Board (EAB)</p>
+                </div>
+                <div class="highlight-box warning" style="margin-top: 2em;">
+                    <strong>But here's the gap:</strong> While ~5% of knowledge jobs need advanced AI skills, <span class="emphasis">~70% require basic AI literacy</span>
+                </div>
+            </section>
+
+            <section>
+                <h2>The Real Differentiator</h2>
+                <div class="two-column">
+                    <div>
+                        <h3 style="color: #718096; text-decoration: line-through;">NOT This:</h3>
+                        <ul>
+                            <li>Technical wizardry</li>
+                            <li>Advanced coding skills</li>
+                            <li>Deep learning expertise</li>
+                            <li>Prompt hacks and tricks</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--sail-green);">✓ But This:</h3>
+                        <ul>
+                            <li><strong>Strategic judgment</strong></li>
+                            <li><strong>Critical questioning</strong></li>
+                            <li><strong>Ethical reasoning</strong></li>
+                            <li><strong>Effective communication</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box insight" style="margin-top: 2em;">
+                    <strong>The ability to blend AI tools with human judgment, critical thinking, and ethical awareness</strong>
+                </div>
+            </section>
+
+            <!-- SAIL Framework -->
+            <section class="section-slide">
+                <h2>The SAIL Framework</h2>
+                <p style="font-size: 1.3em; margin-top: 1em;">Sawyer AI Leadership</p>
+            </section>
+
+            <section>
+                <h2>SAIL: Not About Tools, About Judgment</h2>
+                <div class="sail-grid">
+                    <div class="sail-card social">
+                        <h3><span class="sail-icon">S</span> Social Intelligence</h3>
+                        <p class="sail-question">"How do we connect?"</p>
+                        <p>Translate technical insights into compelling narratives for diverse audiences</p>
+                    </div>
+                    <div class="sail-card ai">
+                        <h3><span class="sail-icon">A</span> AI Literacy</h3>
+                        <p class="sail-question">"How does it work?"</p>
+                        <p>Master AI tools with deep understanding of capabilities and limitations</p>
+                    </div>
+                    <div class="sail-card innovation">
+                        <h3><span class="sail-icon">I</span> Innovation/Inquiry</h3>
+                        <p class="sail-question">"What's missing or wrong?"</p>
+                        <p>Apply critical thinking beyond AI limitations using domain expertise</p>
+                    </div>
+                    <div class="sail-card leadership">
+                        <h3><span class="sail-icon">L</span> Leadership</h3>
+                        <p class="sail-question">"Should we do this?"</p>
+                        <p>Make principled decisions about AI implementation with ethical awareness</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>The Conductor Metaphor</h2>
+                <div class="centered">
+                    <p style="font-size: 1.3em; line-height: 1.6; max-width: 800px;">
+                        <strong>Conductors don't play every instrument</strong>, but they know when to bring in the violins versus the brass section.
+                    </p>
+                    <p style="font-size: 1.3em; line-height: 1.6; max-width: 800px; margin-top: 1.5em;">
+                        That's exactly what students learn with SAIL—<span class="emphasis">determine which tool to use when</span>, while directing the whole composition with <span class="gold">human judgment</span>.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Why Business Schools Need This NOW</h2>
+                <blockquote>
+                    "The ability to direct AI tools strategically is becoming as fundamental to business as Excel was 20 years ago. But unlike Excel, which is just about technical competence, AI orchestration requires <strong>judgment</strong>."
+                </blockquote>
+                <div class="highlight-box success" style="margin-top: 2em;">
+                    <strong>Our approach earned national recognition:</strong><br>
+                    <a href="https://www.aacsb.edu/insights/articles/2025/10/beyond-the-hype-ais-role-in-business-education" target="_blank" style="color: var(--sail-blue);">
+                        "Beyond the Hype: AI's Role in Business Education" - AACSB Insights, October 2025
+                    </a>
+                    <span class="evidence-badge">Published</span>
+                </div>
+            </section>
+
+            <!-- Prompt AIChemy Case Study -->
+            <section class="section-slide">
+                <h2>Case Study: Prompt AIChemy</h2>
+                <p style="font-size: 1.3em; margin-top: 1em;">SAIL Framework in Action</p>
+            </section>
+
+            <section>
+                <h2>What is Prompt AIChemy?</h2>
+                <div class="highlight-box insight">
+                    <p><strong>A competition where students become AI strategy consultants</strong></p>
+                    <p style="margin-top: 1em;">Students craft AI prompts to extract strategic insights from real-world business datasets—demonstrating that effective AI use is about <span class="emphasis">strategic orchestration</span>, not technical coding.</p>
+                </div>
+                <div style="margin-top: 2em;">
+                    <h4>Fall 2025: Boston Airbnb Analysis</h4>
+                    <ul>
+                        <li>~4,500 real listings (September 2025 data)</li>
+                        <li>Students hired as "consultants for Airbnb's Boston Market Development team"</li>
+                        <li>Must balance competing stakeholder interests</li>
+                        <li>3 weeks, 3 strategic questions, endless insights</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Design Principles -->
+            <section class="section-slide">
+                <h2>Design Principles</h2>
+                <p style="font-size: 1.2em; margin-top: 1em;">How We Built SAIL Into the Competition</p>
+            </section>
+
+            <section>
+                <h2>Principle 1: Authentic Complexity</h2>
+                <div class="principle-card">
+                    <p><span class="principle-number">1</span> <strong>Real data, real stakeholders, real tensions</strong></p>
+                </div>
+                <ul class="checkmark">
+                    <li><strong>Real data:</strong> Boston Airbnb dataset (4,500 listings, current as of Sept 2025)</li>
+                    <li><strong>Real stakeholders:</strong> Hosts, guests, neighborhoods, city officials, Airbnb</li>
+                    <li><strong>Real ethical tensions:</strong> Housing affordability vs. economic opportunity</li>
+                </ul>
+                <div class="highlight-box warning" style="margin-top: 1.5em;">
+                    <strong>Why it matters:</strong> Students can't just optimize for one metric—they must navigate complexity and competing interests (just like real business)
+                </div>
+            </section>
+
+            <section>
+                <h2>Principle 2: Role-Based Framing</h2>
+                <div class="principle-card">
+                    <p><span class="principle-number">2</span> <strong>You're not "doing a project"—you're a consultant</strong></p>
+                </div>
+                <blockquote style="font-size: 0.95em;">
+                    "You are a data strategy consultant hired by Airbnb's Boston Market Development team. As Boston debates new short-term rental regulations, Airbnb needs strategic insights to guide their response—insights that balance business growth with community impact."
+                </blockquote>
+                <div class="highlight-box tip" style="margin-top: 1.5em;">
+                    <strong>This shift in framing changes everything:</strong> Students think strategically about deliverables, audience, and business impact—not just "what the professor wants"
+                </div>
+            </section>
+
+            <section>
+                <h2>Principle 3: Structured Ambiguity</h2>
+                <div class="principle-card">
+                    <p><span class="principle-number">3</span> <strong>Clear requirements, multiple paths to excellence</strong></p>
+                </div>
+                <div class="two-column" style="margin-top: 1.5em;">
+                    <div>
+                        <h4 style="color: var(--sail-green);">What's Required:</h4>
+                        <ul>
+                            <li>Address all 3 questions</li>
+                            <li>Document your prompts</li>
+                            <li>Support claims with evidence</li>
+                            <li>Consider stakeholder impacts</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--sail-blue);">What's Open:</h4>
+                        <ul>
+                            <li>Which AI tools to use</li>
+                            <li>Depth vs. breadth strategy</li>
+                            <li>Analytical approach</li>
+                            <li>Prompt engineering style</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box insight" style="margin-top: 1.5em;">
+                    <strong>We grade the reasoning, not the "right answer"</strong>
+                </div>
+            </section>
+
+            <section>
+                <h2>Principle 4: SAIL Integration (Not Insertion)</h2>
+                <div class="principle-card">
+                    <p><span class="principle-number">4</span> <strong>SAIL emerges naturally from the design</strong></p>
+                </div>
+                <div style="margin-top: 1.5em; text-align: left;">
+                    <p><strong style="color: var(--sail-green);">Social Intelligence:</strong> Built in through multi-stakeholder analysis requirement</p>
+                    <p style="margin-top: 0.8em;"><strong style="color: #3182ce;">AI Literacy:</strong> Prompt documentation forces metacognition</p>
+                    <p style="margin-top: 0.8em;"><strong style="color: var(--sail-red);">Innovation/Inquiry:</strong> "Wait, that's weird" moments are explicitly valued in rubric</p>
+                    <p style="margin-top: 0.8em;"><strong style="color: var(--sail-purple);">Leadership:</strong> Ethical considerations are central, not peripheral</p>
+                </div>
+                <blockquote style="margin-top: 1.5em; font-size: 0.9em;">
+                    "The ethical stuff wasn't a checkbox—it came naturally. When I saw that South Boston had 10x more Airbnbs than Dorchester, I immediately wondered about housing impact."
+                    <cite>— Spring 2025 Competition Winner</cite>
+                </blockquote>
+            </section>
+
+            <!-- The Three Questions -->
+            <section>
+                <h2>The Three Strategic Questions</h2>
+                <div style="margin-top: 2em;">
+                    <div class="domain-card">
+                        <h4>Question 1: Host Success & Market Dynamics</h4>
+                        <p>"What factors distinguish successful hosts from struggling ones, and how can Airbnb help more hosts succeed?"</p>
+                    </div>
+                    <div class="domain-card">
+                        <h4>Question 2: Neighborhood Impact & Market Saturation</h4>
+                        <p>"Which Boston neighborhoods show healthy market conditions vs. potential over-saturation?"</p>
+                    </div>
+                    <div class="domain-card">
+                        <h4>Question 3: Guest Experience & Quality Assurance</h4>
+                        <p>"What drives exceptional guest experiences, and how can Airbnb identify quality issues early?"</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>What Makes These Questions Work?</h2>
+                <ul>
+                    <li><strong>Different analytical approaches:</strong> Q1 is segmentation, Q2 is geographic, Q3 is sentiment/quality</li>
+                    <li><strong>Different stakeholder perspectives:</strong> Hosts, neighborhoods, guests</li>
+                    <li><strong>Different ethical tensions:</strong> Individual success vs. community impact vs. platform reputation</li>
+                    <li><strong>Different communication needs:</strong> Technical analysis, strategic recommendations, ethical considerations</li>
+                </ul>
+                <div class="highlight-box success" style="margin-top: 1.5em;">
+                    <strong>Together, they require ALL FOUR SAIL pillars</strong>—not as a checklist, but as a natural consequence of doing the work well
+                </div>
+            </section>
+
+            <!-- Evidence It Works -->
+            <section>
+                <h2>Evidence It Works: Student Outcomes</h2>
+                <blockquote>
+                    "I used to think AI either gave you the right answer or it didn't. But it's actually more like working with someone who needs really clear instructions and ethical guardrails. The better you are at asking questions and checking the results, the better it works."
+                    <cite>— Spring 2025 Participant</cite>
+                </blockquote>
+                <blockquote>
+                    "My first prompts were terrible. I just started exploring and got better as I went. Don't wait for the perfect prompt—just start."
+                    <cite>— Spring 2025 Finalist</cite>
+                </blockquote>
+            </section>
+
+            <section>
+                <h2>What We Observed (Spring 2025)</h2>
+                <ul class="checkmark">
+                    <li>Students naturally raised ethical considerations without being prompted</li>
+                    <li>Sophisticated prompt iteration emerged organically</li>
+                    <li>Communication improved dramatically from first to final submission</li>
+                    <li>Critical questioning of AI outputs became second nature</li>
+                    <li>Students found patterns we (faculty) hadn't anticipated</li>
+                </ul>
+                <div class="highlight-box insight" style="margin-top: 1.5em;">
+                    <strong>When students naturally demonstrate all four SAIL pillars without being told to do so, that's not luck—that's brilliant learning design.</strong>
+                </div>
+            </section>
+
+            <!-- Domain Adaptations -->
+            <section class="section-slide">
+                <h2>Domain Adaptations</h2>
+                <p style="font-size: 1.2em; margin-top: 1em;">How This Transfers Across Disciplines</p>
+            </section>
+
+            <section>
+                <h2>The Template Pattern</h2>
+                <div class="template-box">
+                    <strong>[Domain] AIChemy</strong><br><br>
+                    <strong>Dataset:</strong> Real, complex, current data<br>
+                    <strong>Role:</strong> Professional consultant framing<br>
+                    <strong>Question 1:</strong> Technical/analytical challenge<br>
+                    <strong>Question 2:</strong> Strategic/systemic analysis<br>
+                    <strong>Question 3:</strong> Ethical/stakeholder consideration<br><br>
+                    <strong>SAIL Integration:</strong> Emerges naturally from design<br>
+                    <strong>Assessment:</strong> Evaluate reasoning & judgment, not just answers
+                </div>
+            </section>
+
+            <section>
+                <h2>Finance Example: Portfolio AIChemy</h2>
+                <div class="domain-card">
+                    <p><strong class="role">Role:</strong> Consultant for university endowment</p>
+                    <p><strong>Dataset:</strong> 20 years of stock returns + economic indicators</p>
+                </div>
+                <div style="margin-top: 1.5em; text-align: left;">
+                    <p><strong style="color: var(--sail-blue);">Question 1:</strong> Risk-adjusted performance—What distinguishes resilient portfolios from fragile ones?</p>
+                    <p style="margin-top: 1em;"><strong style="color: var(--sail-blue);">Question 2:</strong> Market regime detection—When do traditional correlations break down?</p>
+                    <p style="margin-top: 1em;"><strong style="color: var(--sail-blue);">Question 3:</strong> Ethical investing—How to balance returns with ESG principles?</p>
+                </div>
+                <div class="highlight-box tip" style="margin-top: 1.5em;">
+                    <strong>SAIL Hook:</strong> Students must present to both CFO (technical) and Board (strategic)
+                </div>
+            </section>
+
+            <section>
+                <h2>Marketing Example: Brand AIChemy</h2>
+                <div class="domain-card">
+                    <p><strong class="role">Role:</strong> Brand strategist for local Boston business</p>
+                    <p><strong>Dataset:</strong> Social media engagement + sales + demographic data</p>
+                </div>
+                <div style="margin-top: 1.5em; text-align: left;">
+                    <p><strong style="color: var(--sail-blue);">Question 1:</strong> Campaign effectiveness—What content drives conversion vs. awareness?</p>
+                    <p style="margin-top: 1em;"><strong style="color: var(--sail-blue);">Question 2:</strong> Audience segmentation—Beyond demographics, what are behavioral tribes?</p>
+                    <p style="margin-top: 1em;"><strong style="color: var(--sail-blue);">Question 3:</strong> Authentic engagement—How to use AI without losing human connection?</p>
+                </div>
+                <div class="highlight-box tip" style="margin-top: 1.5em;">
+                    <strong>SAIL Hook:</strong> Must balance data-driven optimization with brand authenticity
+                </div>
+            </section>
+
+            <section>
+                <h2>Accounting Example: Audit AIChemy</h2>
+                <div class="domain-card">
+                    <p><strong class="role">Role:</strong> Audit analytics consultant</p>
+                    <p><strong>Dataset:</strong> Transaction records + vendor data + prior audit findings</p>
+                </div>
+                <div style="margin-top: 1.5em; text-align: left;">
+                    <p><strong style="color: var(--sail-blue);">Question 1:</strong> Anomaly detection—What patterns suggest fraud vs. errors?</p>
+                    <p style="margin-top: 1em;"><strong style="color: var(--sail-blue);">Question 2:</strong> Risk assessment—Where should auditors focus limited time?</p>
+                    <p style="margin-top: 1em;"><strong style="color: var(--sail-blue);">Question 3:</strong> Ethical automation—What should AI flag vs. require human judgment?</p>
+                </div>
+                <div class="highlight-box tip" style="margin-top: 1.5em;">
+                    <strong>SAIL Hook:</strong> Must explain findings to both technical team and client executives
+                </div>
+            </section>
+
+            <section>
+                <h2>The Common Pattern</h2>
+                <div class="highlight-box insight">
+                    <strong>All three examples share:</strong>
+                    <ul class="checkmark" style="margin-top: 1em;">
+                        <li>Real data complexity</li>
+                        <li>Multiple stakeholder perspectives</li>
+                        <li>Ethical tensions built in</li>
+                        <li>Communication challenge across audiences</li>
+                        <li>No single "right answer"</li>
+                    </ul>
+                </div>
+                <div class="highlight-box success" style="margin-top: 1.5em;">
+                    <strong>The template works because it creates conditions where SAIL pillars emerge naturally</strong>
+                </div>
+            </section>
+
+            <!-- Assessment -->
+            <section>
+                <h2>How We Assess (The Rubric)</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5em;">
+                    <div class="principle-card">
+                        <h4>Business Value (30%)</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>Actionability of insights</li>
+                            <li>Strategic thinking</li>
+                            <li>Business impact</li>
+                        </ul>
+                    </div>
+                    <div class="principle-card">
+                        <h4>Prompt Engineering (30%)</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>Sophistication</li>
+                            <li>Strategic approach</li>
+                            <li>Iterative refinement</li>
+                        </ul>
+                    </div>
+                    <div class="principle-card">
+                        <h4>SAIL Framework (20%)</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>All four pillars evident</li>
+                            <li>Natural integration</li>
+                            <li>Ethical nuance</li>
+                        </ul>
+                    </div>
+                    <div class="principle-card">
+                        <h4>Presentation (20%)</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>Clarity</li>
+                            <li>Visual communication</li>
+                            <li>Storytelling</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workshop Time -->
+            <section class="section-slide">
+                <h2>Your Turn</h2>
+                <p style="font-size: 1.3em; margin-top: 1em;">Interactive Workshop</p>
+            </section>
+
+            <section>
+                <h2>Workshop Exercise (5 Minutes)</h2>
+                <div class="workshop-prompt">
+                    <p style="font-size: 1.2em; margin-bottom: 1em;"><strong>Think about YOUR domain...</strong></p>
+                    <p>"What dataset would create authentic tensions and require all four SAIL pillars?"</p>
+                    <p style="margin-top: 1.5em; font-size: 0.95em;">Consider:</p>
+                    <ul style="margin-top: 0.5em;">
+                        <li>What real data is publicly available?</li>
+                        <li>What ethical tensions exist in your field?</li>
+                        <li>What stakeholders have competing interests?</li>
+                        <li>What would students find genuinely interesting?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>Share Out</h2>
+                <div class="centered">
+                    <p style="font-size: 1.3em; line-height: 1.6;">Each group: Share <strong>one idea</strong> (30 seconds)</p>
+                    <p style="font-size: 1.1em; margin-top: 2em; color: #718096;">These will seed future SAIL Fridays sessions with domain-specific implementations</p>
+                </div>
+            </section>
+
+            <!-- Takeaways -->
+            <section class="section-slide">
+                <h2>Key Takeaways</h2>
+            </section>
+
+            <section>
+                <h2>What We've Learned</h2>
+                <ol style="font-size: 1.1em; line-height: 1.8;">
+                    <li><strong>SAIL isn't just a framework we teach TO students</strong>—it's a design lens we use to CREATE learning experiences</li>
+                    <li><strong>Authentic complexity drives authentic learning</strong>—real data, real tensions, real stakeholders</li>
+                    <li><strong>Role-based framing transforms student mindset</strong>—from "what does the professor want?" to "what does the client need?"</li>
+                    <li><strong>Assessment should evaluate judgment</strong>, not just technical execution</li>
+                    <li><strong>The template is transferable</strong>—adapt it for your domain</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>The Meta-Lesson</h2>
+                <div class="cta-box">
+                    <h3>You Don't Need to Be an AI Expert</h3>
+                    <p style="font-size: 1.2em; line-height: 1.6;">You need to design experiences where students develop AI judgment through authentic practice.</p>
+                    <p style="font-size: 1.2em; line-height: 1.6; margin-top: 1em;">That's something we, as faculty, <span class="gold">already know how to do</span>.</p>
+                </div>
+            </section>
+
+            <!-- Resources & Next Steps -->
+            <section>
+                <h2>Resources Available</h2>
+                <ul class="checkmark">
+                    <li><strong>Competition guide:</strong> <a href="https://harslan.github.io/prompt-aichemy/competition-guide.html" target="_blank">harslan.github.io/prompt-aichemy</a></li>
+                    <li><strong>Assessment rubric:</strong> Transferable to other contexts</li>
+                    <li><strong>Sample student prompts:</strong> Anonymized examples of effective strategies</li>
+                    <li><strong>SAIL integration examples:</strong> Finance, marketing, accounting templates</li>
+                    <li><strong>Published article:</strong> <a href="https://www.aacsb.edu/insights/articles/2025/10/beyond-the-hype-ais-role-in-business-education" target="_blank">AACSB Insights</a></li>
+                </ul>
+                <div class="highlight-box success" style="margin-top: 1.5em;">
+                    <strong>Want to co-design for your domain?</strong> Reach out—SAIL team is here to support!
+                </div>
+            </section>
+
+            <section>
+                <h2>Next Steps</h2>
+                <div style="text-align: left; font-size: 1.1em; line-height: 1.8;">
+                    <p><strong>For you:</strong></p>
+                    <ul>
+                        <li>Think about what dataset could work in your courses</li>
+                        <li>Identify the ethical tensions in your domain</li>
+                        <li>Consider how to frame students as professionals</li>
+                    </ul>
+                    <p style="margin-top: 1.5em;"><strong>For SAIL Fridays:</strong></p>
+                    <ul>
+                        <li>Future sessions will spotlight domain implementations</li>
+                        <li>Peer-to-peer sharing of adaptations</li>
+                        <li>Building a library of SAIL-based learning experiences</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Closing -->
+            <section class="title-slide" data-background-gradient="linear-gradient(135deg, #2c5282 0%, #3182ce 100%)">
+                <h2>Questions & Discussion</h2>
+                <div style="margin-top: 3em;">
+                    <p><strong>Prof. Hasan Arslan</strong></p>
+                    <p>harslan@suffolk.edu</p>
+                    <p style="margin-top: 1em; font-size: 0.9em;">Competition Guide: <a href="https://harslan.github.io/prompt-aichemy/" target="_blank" style="color: var(--sail-gold);">harslan.github.io/prompt-aichemy</a></p>
+                    <p style="font-size: 0.9em;">SAIL Framework: <a href="https://sites.suffolk.edu/sail/" target="_blank" style="color: var(--sail-gold);">sites.suffolk.edu/sail</a></p>
+                </div>
+                <div style="margin-top: 3em; font-size: 1.3em;">
+                    <p>Let's turn learning design into <span class="gold">gold</span> ⚗️</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/highlight.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            controlsLayout: 'bottom-right',
+            progress: true,
+            history: true,
+            keyboard: true,
+            overview: true,
+            touch: true,
+            loop: false,
+            rtl: false,
+            navigationMode: 'default',
+            shuffle: false,
+            fragments: true,
+            fragmentInURL: true,
+            embedded: false,
+            help: true,
+            pause: true,
+            showNotes: false,
+            autoPlayMedia: null,
+            preloadIframes: null,
+            autoAnimate: true,
+            autoAnimateMatcher: null,
+            autoAnimateEasing: 'ease',
+            autoAnimateDuration: 1.0,
+            autoAnimateUnmatched: true,
+            autoSlide: 0,
+            autoSlideStoppable: true,
+            autoSlideMethod: null,
+            defaultTiming: null,
+            mouseWheel: false,
+            previewLinks: false,
+            postMessage: true,
+            postMessageEvents: false,
+            focusBodyOnPageVisibilityChange: true,
+            width: '100%',
+            height: '100%',
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0,
+            disableLayout: false,
+            plugins: [ RevealNotes, RevealHighlight ]
+        });
+
+        // Custom keyboard shortcuts
+        Reveal.addKeyBinding({keyCode: 66, key: 'B', description: 'Toggle black screen'}, () => {
+            document.querySelector('.reveal').style.display = 
+                document.querySelector('.reveal').style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
