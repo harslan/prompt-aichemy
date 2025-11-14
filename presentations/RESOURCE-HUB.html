@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAIL Fridays Workshop - Resource Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            font-size: 3em;
+            color: #2c5282;
+            margin-bottom: 15px;
+        }
+        .tagline {
+            font-size: 1.4em;
+            color: #718096;
+            margin-bottom: 20px;
+        }
+        .workshop-info {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .info-item {
+            display: inline-block;
+            margin: 0 20px;
+            font-size: 1.1em;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #667eea;
+        }
+        .section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 2em;
+            color: #2c5282;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        .resource-card {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .resource-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        .resource-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 10px;
+        }
+        .resource-description {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .resource-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .resource-link:hover {
+            background: #5568d3;
+            transform: translateX(5px);
+        }
+        .quick-start {
+            background: linear-gradient(135deg, #fef5e7 0%, #fff3cd 100%);
+            border-left: 5px solid #f39c12;
+        }
+        .key-numbers {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+        .number-box {
+            text-align: center;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            border: 3px solid #e53e3e;
+        }
+        .big-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #e53e3e;
+        }
+        .number-label {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-top: 10px;
+        }
+        .timeline {
+            background: #e6f7ff;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #3182ce;
+        }
+        .timeline-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+        .timeline-time {
+            font-weight: bold;
+            color: #667eea;
+            display: inline-block;
+            width: 100px;
+        }
+        .checklist {
+            background: #d4edda;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #28a745;
+        }
+        .checklist-item {
+            margin: 12px 0;
+            font-size: 1.1em;
+        }
+        .checklist-item input {
+            margin-right: 12px;
+            transform: scale(1.4);
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+            .key-numbers {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚗️ SAIL Fridays Workshop</h1>
+            <p class="tagline">Design Your Own AI-Enabled Assignment</p>
+            <div class="workshop-info">
+                <div class="info-item">
+                    <span class="info-label">Duration:</span> 60 minutes
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Format:</span> Zoom Workshop
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Outcome:</span> Draft Assignment
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Start Section -->
+        <div class="section quick-start">
+            <div class="section-title">🚀 Start Here: Your Hook</div>
+            <p style="font-size: 1.3em; margin-bottom: 20px; line-height: 1.6;">
+                <strong>The Story:</strong> Two days ago, our students analyzed Boston Airbnb data. One finding was fascinating...
+            </p>
+            <div class="key-numbers">
+                <div class="number-box">
+                    <div class="big-number">-$154</div>
+                    <div class="number-label">How much LESS superhosts charge</div>
+                </div>
+                <div class="number-box">
+                    <div class="big-number">$87 vs $62</div>
+                    <div class="number-label">Daily revenue: Superhosts vs regular</div>
+                </div>
+                <div class="number-box">
+                    <div class="big-number">Volume</div>
+                    <div class="number-label">The strategy: Lower price, higher occupancy</div>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 1.5em; color: #2c5282; margin-top: 20px;">
+                <strong>"Elite hosts charge LESS but earn MORE—how?"</strong>
+            </p>
+        </div>
+
+        <!-- Core Resources -->
+        <div class="section">
+            <div class="section-title">📚 Essential Resources (Use These!)</div>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">🎨</div>
+                    <div class="resource-title">Workshop Presentation</div>
+                    <div class="resource-description">
+                        Complete 16-slide presentation with built-in timer. Fully responsive and ready to screen share on Zoom.
+                    </div>
+                    <a href="sail-fridays-workshop-final.html" class="resource-link">Open Presentation →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📋</div>
+                    <div class="resource-title">Live Demo Script</div>
+                    <div class="resource-description">
+                        Complete 10-minute walkthrough with exact timing, narration, and two-stage prompt refinement.
+                    </div>
+                    <a href="live-demo-script-final.md" class="resource-link">View Full Script →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📄</div>
+                    <div class="resource-title">Demo Cheat Sheet</div>
+                    <div class="resource-description">
+                        One-page quick reference. Print this and keep it visible during your presentation!
+                    </div>
+                    <a href="demo-cheat-sheet-final.md" class="resource-link">View Cheat Sheet →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎥</div>
+                    <div class="resource-title">Zoom Delivery Guide</div>
+                    <div class="resource-description">
+                        Complete guide for remote delivery: breakout rooms, chat strategy, engagement tactics.
+                    </div>
+                    <a href="zoom-specific-guide.md" class="resource-link">View Zoom Guide →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎯</div>
+                    <div class="resource-title">Quick Start Card</div>
+                    <div class="resource-description">
+                        Visual one-page summary with timeline, key messages, checklist, and tips.
+                    </div>
+                    <a href="workshop-quick-start-card.html" class="resource-link">View Quick Start →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🗂️</div>
+                    <div class="resource-title">Master Index</div>
+                    <div class="resource-description">
+                        Complete navigation hub with all materials, checklists, and success metrics.
+                    </div>
+                    <a href="MASTER-INDEX.md" class="resource-link">View Master Index →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="section">
+            <div class="section-title">⏱️ Workshop Timeline</div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-time">0-5 min</span>
+                    <strong>Opening Hook:</strong> Solomon's finding + honest hybrid framing
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-time">5-10 min</span>
+                    <strong>SAIL Framework:</strong> Four pillars that emerge when forced
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-time">10-20 min</span>
+                    <strong>Live Demo:</strong> Two-stage prompt refinement (basic → context → investigation)
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-time">20-25 min</span>
+                    <strong>Setup:</strong> Inside Airbnb dataset + design pattern + launch breakouts
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-time">25-45 min</span>
+                    <strong>Design Time:</strong> Faculty create assignments in breakout rooms
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-time">45-57 min</span>
+                    <strong>Shareouts:</strong> Each room presents (3 min each, emoji feedback)
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-time">57-60 min</span>
+                    <strong>Closing:</strong> Resources, pilot opportunity, next steps
+                </div>
+            </div>
+        </div>
+
+        <!-- Supporting Materials -->
+        <div class="section">
+            <div class="section-title">📊 Supporting Materials</div>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">🗂️</div>
+                    <div class="resource-title">Inside Airbnb Handout</div>
+                    <div class="resource-description">
+                        One-page faculty resource about the dataset, cross-disciplinary applications, quick start guide.
+                    </div>
+                    <a href="inside-airbnb-faculty-resource.html" class="resource-link">View Handout →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">💬</div>
+                    <div class="resource-title">Speaker Notes</div>
+                    <div class="resource-description">
+                        Detailed talking points about Inside Airbnb, transferability positioning, anticipated Q&A responses.
+                    </div>
+                    <a href="speaker-notes-airbnb-dataset.md" class="resource-link">View Notes →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎓</div>
+                    <div class="resource-title">Student Portfolio Guide</div>
+                    <div class="resource-description">
+                        Winter break project plan for students: GitHub repos, case studies, interview prep.
+                    </div>
+                    <a href="student-portfolio-guide.md" class="resource-link">View Portfolio Guide →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📋</div>
+                    <div class="resource-title">Final Workshop Summary</div>
+                    <div class="resource-description">
+                        Complete overview of honest hybrid approach, why it's stronger, success metrics, checklists.
+                    </div>
+                    <a href="FINAL-WORKSHOP-SUMMARY.md" class="resource-link">View Summary →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pre-Workshop Checklist -->
+        <div class="section">
+            <div class="section-title">✅ Pre-Workshop Checklist</div>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">Upload listings.csv to Claude.ai</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">Print demo cheat sheet to keep visible</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">Create Zoom breakout rooms (4-5 rooms by discipline)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">Pre-write chat messages for copy-paste</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">Test screen sharing (presentation + Claude tabs)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">Memorize key numbers: -$154, $87 vs $62</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">Review Zoom guide for remote delivery tips</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">Prepare post-workshop email (ready to send)</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Messages -->
+        <div class="section">
+            <div class="section-title">🎯 Your Core Messages</div>
+            <div style="background: #f7fafc; padding: 30px; border-radius: 15px; border-left: 5px solid #667eea;">
+                <div style="margin-bottom: 25px;">
+                    <strong style="font-size: 1.3em; color: #667eea;">The Hook:</strong>
+                    <p style="font-size: 1.2em; margin-top: 10px;">"Superhosts charge $154 LESS but earn $87/day vs $62/day—how?"</p>
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <strong style="font-size: 1.3em; color: #667eea;">The Frame:</strong>
+                    <p style="font-size: 1.2em; margin-top: 10px;">"Solomon used Python. Others used AI. Both worked when question forced SAIL."</p>
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <strong style="font-size: 1.3em; color: #667eea;">The Demo:</strong>
+                    <p style="font-size: 1.2em; margin-top: 10px;">"Basic prompt → obvious. Refined prompt (2 stages) → strategic depth."</p>
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <strong style="font-size: 1.3em; color: #667eea;">The Lesson:</strong>
+                    <p style="font-size: 1.2em; margin-top: 10px;">"Question design creates conditions for SAIL, regardless of tools."</p>
+                </div>
+                <div>
+                    <strong style="font-size: 1.3em; color: #667eea;">The Workshop:</strong>
+                    <p style="font-size: 1.2em; margin-top: 10px;">"Design YOUR version for YOUR discipline. 20 minutes. Go!"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="background: white; padding: 40px; border-radius: 20px; text-align: center; margin-top: 40px;">
+            <h2 style="color: #2c5282; margin-bottom: 20px;">🌟 You're Ready!</h2>
+            <p style="font-size: 1.3em; color: #4a5568; line-height: 1.8;">
+                You have a compelling hook (superhost paradox)<br>
+                An honest narrative (multiple paths work)<br>
+                A clear demo (two-stage refinement)<br>
+                Complete resources (all docs ready)<br>
+                Strong positioning (question design as leverage)
+            </p>
+            <p style="font-size: 1.5em; color: #667eea; margin-top: 30px; font-weight: bold;">
+                "Multiple tools, one destination:<br>Critical thinking through good question design."
+            </p>
+            <div style="margin-top: 40px; padding-top: 30px; border-top: 2px solid #e2e8f0;">
+                <p style="color: #718096;">
+                    <strong>Prof. Hasan Arslan</strong><br>
+                    Chief AI Officer & Associate Professor<br>
+                    SAIL Collaborative Lead<br>
+                    harslan@suffolk.edu • sites.suffolk.edu/sail
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Make checkboxes persist
+        document.querySelectorAll('.checklist-item input').forEach(checkbox => {
+            const id = checkbox.id;
+            checkbox.checked = localStorage.getItem(id) === 'true';
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(id, this.checked);
+            });
+        });
+    </script>
+</body>
+</html>

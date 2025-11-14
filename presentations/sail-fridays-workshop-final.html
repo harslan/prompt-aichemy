@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAIL Fridays: Design Your AI-Enabled Assignment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .presentation-container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 60px;
+            min-height: 600px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #2c5282;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #3182ce;
+            margin-bottom: 20px;
+        }
+
+        p, li {
+            font-size: 1.3em;
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #718096;
+            margin-top: 10px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            font-size: 1.4em;
+            line-height: 1.6;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .column {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .stat-box {
+            background: #fff3cd;
+            border: 3px solid #ffc107;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #e53e3e;
+        }
+
+        .stat-label {
+            font-size: 1.3em;
+            color: #4a5568;
+            margin-top: 10px;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .pillar-box {
+            background: white;
+            border: 3px solid #667eea;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .pillar-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin-left: 40px;
+            margin-top: 20px;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        .emphasis {
+            background: #fef5e7;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #f39c12;
+            margin: 30px 0;
+            font-size: 1.4em;
+        }
+
+        .timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #e53e3e;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 2em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: none;
+        }
+
+        .timer.active {
+            display: block;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #f7fafc;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        button:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-number {
+            font-size: 1.2em;
+            color: #718096;
+        }
+
+        .prompt-demo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 30px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 20px 0;
+            white-space: pre-wrap;
+        }
+
+        .data-field {
+            background: #e6f7ff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 5px;
+            font-family: monospace;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+                min-height: 400px;
+            }
+            
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.4em; }
+            p, li { font-size: 1.1em; }
+            
+            .two-column, .three-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .timer {
+                font-size: 1.5em;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>Design Your Own AI-Enabled Assignment</h1>
+            <p class="subtitle">SAIL Fridays Workshop • November 2025</p>
+            <div class="highlight-box">
+                <strong>Today's Goal:</strong> You leave with a draft assignment you can pilot next semester—designed to activate critical thinking naturally through authentic complexity.
+            </div>
+            <p style="font-size: 1.2em; color: #718096; margin-top: 30px;">Prof. Hasan Arslan • SAIL Collaborative • Suffolk University</p>
+        </div>
+
+        <!-- Slide 2: The Hook -->
+        <div class="slide">
+            <h2>Two Days Ago...</h2>
+            <p style="font-size: 1.4em; margin-bottom: 40px;">Our students finished analyzing Boston Airbnb data. One finding stopped me in my tracks:</p>
+            
+            <div class="stat-box">
+                <div class="stat-number">-$154</div>
+                <div class="stat-label">How much LESS elite "superhosts" charge per night</div>
+            </div>
+
+            <div class="two-column" style="margin-top: 40px;">
+                <div class="stat-box">
+                    <div class="stat-number">$87/day</div>
+                    <div class="stat-label">Superhost revenue</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">$62/day</div>
+                    <div class="stat-label">Regular host revenue</div>
+                </div>
+            </div>
+
+            <p style="font-size: 1.5em; text-align: center; margin-top: 40px; color: #2c5282;"><strong>How do elite hosts charge LESS but earn MORE?</strong></p>
+        </div>
+
+        <!-- Slide 3: Multiple Paths -->
+        <div class="slide">
+            <h2>Multiple Paths, Same Insight</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3 style="color: #667eea;">Solomon's Path: Python</h3>
+                    <ul>
+                        <li>Regression analysis</li>
+                        <li>Statistical modeling</li>
+                        <li>Correlation matrices</li>
+                        <li>Used AI for coding help</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-weight: bold;">Found: Volume strategy—lower price, higher occupancy</p>
+                </div>
+                
+                <div class="column">
+                    <h3 style="color: #764ba2;">Alternative Path: AI Strategy</h3>
+                    <ul>
+                        <li>Strategic prompting</li>
+                        <li>Multi-dimensional analysis</li>
+                        <li>Iterative refinement</li>
+                        <li>Critical questioning</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-weight: bold;">Can find: Same patterns through different lens</p>
+                </div>
+            </div>
+
+            <div class="emphasis" style="margin-top: 40px;">
+                <strong>Key Insight:</strong> Solomon couldn't have succeeded without defining success multi-dimensionally, questioning assumptions, investigating patterns, and considering stakeholder impacts. That's SAIL—forced by question design, not tool choice.
+            </div>
+        </div>
+
+        <!-- Slide 4: SAIL Quick Intro -->
+        <div class="slide">
+            <h2>The SAIL Framework</h2>
+            <p style="font-size: 1.3em; margin-bottom: 40px;">Four pillars that distinguish strategic professionals from tool operators:</p>
+            
+            <div class="two-column">
+                <div class="pillar-box">
+                    <div class="pillar-icon">🤝</div>
+                    <h3>Social Intelligence</h3>
+                    <p>Translate technical → strategic for different audiences</p>
+                </div>
+                
+                <div class="pillar-box">
+                    <div class="pillar-icon">🧠</div>
+                    <h3>AI Literacy</h3>
+                    <p>Orchestrate AI tools strategically, not just use them</p>
+                </div>
+            </div>
+
+            <div class="two-column" style="margin-top: 30px;">
+                <div class="pillar-box">
+                    <div class="pillar-icon">🔍</div>
+                    <h3>Innovation/Inquiry</h3>
+                    <p>Question outputs, look for what's missing or wrong</p>
+                </div>
+                
+                <div class="pillar-box">
+                    <div class="pillar-icon">⚖️</div>
+                    <h3>Leadership</h3>
+                    <p>Consider ethical implications and stakeholder impacts</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 40px;">
+                When assignments have authentic complexity with competing stakeholder interests, SAIL emerges naturally—because students can't succeed without it.
+            </div>
+        </div>
+
+        <!-- Slide 5: Live Demo Intro -->
+        <div class="slide">
+            <h2>Live Demo: AI Strategy in Action</h2>
+            <p style="font-size: 1.4em; margin-bottom: 30px;">Let me show you how the same analysis could be approached using AI tools. I'll demonstrate the iteration process in two stages:</p>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Stage 1: Basic Approach</h3>
+                    <p>Generic prompt → obvious correlations</p>
+                    <p style="margin-top: 20px; font-style: italic; color: #718096;">"AI gave me surface-level insights"</p>
+                </div>
+                
+                <div class="column">
+                    <h3>Stage 2: Strategic Refinement</h3>
+                    <p>Add role framing, stakeholder lens, critical questioning</p>
+                    <p style="margin-top: 20px; font-style: italic; color: #718096;">"Now AI helps me investigate deeply"</p>
+                </div>
+            </div>
+
+            <div class="emphasis" style="margin-top: 40px;">
+                <strong>What to Watch For:</strong> How do we move from correlation → causation, from patterns → insights, from data → strategy?
+            </div>
+
+            <p style="font-size: 1.3em; margin-top: 30px; text-align: center; color: #2c5282;"><em>Watch how SAIL pillars emerge naturally through prompt design...</em></p>
+        </div>
+
+        <!-- Slide 6: Basic Prompt Demo -->
+        <div class="slide">
+            <h2>Stage 1: Basic Prompt</h2>
+            <p style="font-size: 1.3em; margin-bottom: 20px;">The student who treats this like simple homework:</p>
+            
+            <div class="prompt-demo">Analyze the Boston Airbnb listings data to identify factors that 
+distinguish successful hosts from struggling ones. Focus on review 
+scores and pricing.</div>
+
+            <div style="margin-top: 30px;">
+                <h3>What's Missing:</h3>
+                <ul>
+                    <li>No definition of what "success" means</li>
+                    <li>No role framing or business context</li>
+                    <li>No specific stakeholders mentioned</li>
+                    <li>No request for critical evaluation</li>
+                    <li>Just "analyze and tell me what correlates"</li>
+                </ul>
+            </div>
+
+            <div class="emphasis" style="margin-top: 30px;">
+                <strong>Typical Result:</strong> AI returns obvious patterns—"High reviews = success, Higher prices indicate better listings, Superhosts perform well." True, but surface-level. A student who stops here gets a C.
+            </div>
+        </div>
+
+        <!-- Slide 7: Refined Prompt - Part 1 -->
+        <div class="slide">
+            <h2>Stage 2A: Adding Strategic Context</h2>
+            <p style="font-size: 1.3em; margin-bottom: 20px;">First iteration: Add role framing and multi-dimensional success</p>
+            
+            <div class="prompt-demo">You are a data strategist for Airbnb's Host Success team.
+
+Develop a multi-dimensional framework for "host success":
+1. Financial Performance (revenue, pricing, occupancy)
+2. Guest Satisfaction (reviews, response, engagement)  
+3. Platform Health (quality, neighborhood reputation)
+4. Host Sustainability (burnout indicators, balance)
+
+Analyze Boston listings across these dimensions.</div>
+
+            <div style="margin-top: 30px;">
+                <h3>What Changed:</h3>
+                <ul>
+                    <li>✅ Strategic role creates business context</li>
+                    <li>✅ Success defined across multiple dimensions</li>
+                    <li>✅ Considers platform health, not just revenue</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 30px;">
+                <strong>SAIL Activation:</strong> Social Intelligence (multiple stakeholders) + AI Literacy (role-based prompting)
+            </div>
+        </div>
+
+        <!-- Slide 8: Refined Prompt - Part 2 -->
+        <div class="slide">
+            <h2>Stage 2B: Adding Critical Investigation</h2>
+            <p style="font-size: 1.3em; margin-bottom: 20px;">Second iteration: Add the investigation request and ethical lens</p>
+            
+            <div class="prompt-demo">SPECIFIC INVESTIGATION:
+Superhosts are Airbnb's elite tier. Analyze:
+- Do they charge MORE or LESS than similar listings?
+- If less, why? Strategic volume play? Complacency?
+- Do guests rate them HIGHER or LOWER on value?
+
+CRITICAL EVALUATION:
+- Question correlation vs. causation
+- Consider what data does NOT tell us
+- Acknowledge potential biases
+- Think about second-order effects
+
+OUTPUT: Success framework, superhost analysis, ethical 
+considerations, actionable recommendations</div>
+
+            <div style="margin-top: 30px;">
+                <h3>Additional Depth:</h3>
+                <ul>
+                    <li>✅ Directs investigation of surprising patterns</li>
+                    <li>✅ Requests critical questioning of outputs</li>
+                    <li>✅ Embeds ethical awareness naturally</li>
+                    <li>✅ Demands actionable strategy</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 30px;">
+                <strong>Full SAIL:</strong> Innovation/Inquiry (question assumptions) + Leadership (ethical implications)
+            </div>
+        </div>
+
+        <!-- Slide 9: The Payoff -->
+        <div class="slide">
+            <h2>The Result: Strategic Analysis</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Basic Prompt Got:</h3>
+                    <ul>
+                        <li>High reviews = good</li>
+                        <li>Superhosts = better</li>
+                        <li>Higher occupancy = success</li>
+                        <li>Obvious correlations</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Refined Prompt Got:</h3>
+                    <ul>
+                        <li>Multi-tiered success framework</li>
+                        <li>Superhost paradox investigation</li>
+                        <li>Hypotheses about WHY patterns exist</li>
+                        <li>Ethical considerations surfaced</li>
+                        <li>Stakeholder trade-offs identified</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="emphasis" style="margin-top: 40px;">
+                AI investigated the exact same paradox Solomon found with Python: Superhosts charge less but earn more through volume strategy. <strong>Both paths work when the QUESTION forces critical thinking.</strong>
+            </div>
+
+            <p style="font-size: 1.4em; margin-top: 30px; text-align: center; color: #2c5282;">The tool doesn't matter. The question design does.</p>
+        </div>
+
+        <!-- Slide 10: The Boston Airbnb Dataset -->
+        <div class="slide">
+            <h2>The Dataset: Inside Airbnb</h2>
+            <p style="font-size: 1.4em; margin-bottom: 30px; text-align: center;"><strong>insideairbnb.com/get-the-data</strong></p>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Why Perfect for SAIL:</h3>
+                    <ul>
+                        <li>Free, public, updated quarterly</li>
+                        <li>100+ cities worldwide</li>
+                        <li>Built-in ethical tensions (housing debate)</li>
+                        <li>Local relevance (students know neighborhoods)</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>What Students Get:</h3>
+                    <ul>
+                        <li>~4,500 Boston listings</li>
+                        <li>Pricing, ratings, host data</li>
+                        <li>Review text and sentiment</li>
+                        <li>Geographic distribution</li>
+                        <li>Booking patterns over time</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 40px;">
+                <strong>Key Fields:</strong> 
+                <div style="margin-top: 15px;">
+                    <span class="data-field">price</span>
+                    <span class="data-field">neighbourhood</span>
+                    <span class="data-field">property_type</span>
+                    <span class="data-field">host_is_superhost</span>
+                    <span class="data-field">review_scores_rating</span>
+                    <span class="data-field">number_of_reviews</span>
+                    <span class="data-field">availability_365</span>
+                </div>
+            </div>
+
+            <p style="font-size: 1.3em; margin-top: 30px; text-align: center; font-style: italic;">If you're in Chicago, use Chicago data. If Miami, use Miami. The template stays the same.</p>
+        </div>
+
+        <!-- Slide 11: The Design Pattern -->
+        <div class="slide">
+            <h2>The Design Pattern That Works</h2>
+            <p style="font-size: 1.3em; margin-bottom: 30px;">What made the Airbnb assignment activate SAIL naturally?</p>
+            
+            <div style="margin-top: 30px;">
+                <h3>1. Professional Role Framing</h3>
+                <div class="emphasis">
+                    "You are a consultant for Airbnb's Boston Market Development team..."
+                    <p style="margin-top: 15px; font-size: 0.9em;">Students aren't doing homework—they're solving a real business problem.</p>
+                </div>
+
+                <h3 style="margin-top: 30px;">2. Authentic Complexity</h3>
+                <div class="emphasis">
+                    Real data with surprises + Competing stakeholder interests + No single "right answer"
+                    <p style="margin-top: 15px; font-size: 0.9em;">Hosts want income, neighborhoods want affordability, guests want quality, city wants compliance.</p>
+                </div>
+
+                <h3 style="margin-top: 30px;">3. Strategic Questions</h3>
+                <div class="emphasis">
+                    Define success multi-dimensionally → Investigate surprising patterns → Balance competing interests
+                    <p style="margin-top: 15px; font-size: 0.9em;">Can't answer without Social Intelligence, AI Literacy, Innovation/Inquiry, and Leadership.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Your Turn - Workshop Time -->
+        <div class="slide">
+            <h2>Now It's Your Turn!</h2>
+            
+            <div class="highlight-box">
+                <h3 style="color: white; margin-bottom: 20px;">Your Mission (20 Minutes):</h3>
+                <p style="font-size: 1.3em;">Design YOUR version of this assignment for YOUR discipline using the template.</p>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <h3>Think About:</h3>
+                <ul style="font-size: 1.3em;">
+                    <li>What dataset in your field has similar complexity?</li>
+                    <li>What competing stakeholder interests exist?</li>
+                    <li>What surprising patterns might emerge?</li>
+                    <li>What professional role frames the work?</li>
+                </ul>
+            </div>
+
+            <div class="emphasis" style="margin-top: 40px;">
+                <strong>We'll break into Zoom breakout rooms by discipline.</strong> Use the design template to draft your assignment. I'll pop into each room to help.
+            </div>
+
+            <p style="font-size: 1.5em; margin-top: 30px; text-align: center; color: #e53e3e;"><strong>Timer starting... 20 minutes!</strong></p>
+        </div>
+
+        <!-- Slide 13: Dataset Ideas -->
+        <div class="slide">
+            <h2>Dataset Ideas Across Disciplines</h2>
+            
+            <div class="three-column">
+                <div class="column">
+                    <h3>Finance</h3>
+                    <ul>
+                        <li>SEC filings (data.gov)</li>
+                        <li>Stock performance data</li>
+                        <li>Lending Club data</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Marketing</h3>
+                    <ul>
+                        <li>Consumer reviews (Amazon, Yelp)</li>
+                        <li>Social media engagement</li>
+                        <li>Brand sentiment data</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Operations</h3>
+                    <ul>
+                        <li>Supply chain data</li>
+                        <li>Public transit performance</li>
+                        <li>Healthcare wait times</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="three-column" style="margin-top: 30px;">
+                <div class="column">
+                    <h3>Accounting</h3>
+                    <ul>
+                        <li>Public company financials</li>
+                        <li>Tax policy impacts</li>
+                        <li>Audit quality data</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Ethics/Law</h3>
+                    <ul>
+                        <li>Campaign finance (OpenSecrets)</li>
+                        <li>Criminal justice data</li>
+                        <li>Environmental violations</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Strategy</h3>
+                    <ul>
+                        <li>Competitive intelligence</li>
+                        <li>Market entry data</li>
+                        <li>Industry disruption metrics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 40px;">
+                <strong>Look for:</strong> Public access • Regular updates • Multi-dimensional • Stakeholder tensions • Ethical complexity • Local relevance
+            </div>
+        </div>
+
+        <!-- Slide 14: Shareout Instructions -->
+        <div class="slide">
+            <h2>Shareout Time: Gallery Walk</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Each breakout room will share their draft assignment (3 minutes each)</p>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Presenters Share:</h3>
+                    <ul>
+                        <li>Your discipline and dataset</li>
+                        <li>Professional role framing</li>
+                        <li>Competing stakeholders</li>
+                        <li>One strategic question</li>
+                        <li>How it activates SAIL</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Audience Provides Feedback:</h3>
+                    <p style="margin-bottom: 15px;">Drop reactions in chat:</p>
+                    <ul>
+                        <li>🟢 "I love this aspect..."</li>
+                        <li>🟡 "What if you also..."</li>
+                        <li>🟣 "Which SAIL pillar does this activate?"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="emphasis" style="margin-top: 40px;">
+                <strong>Remember:</strong> You're not presenting a finished product—you're sharing a draft and learning from each other's approaches. Diverse perspectives make us all better designers.
+            </div>
+        </div>
+
+        <!-- Slide 15: Closing - Next Steps -->
+        <div class="slide">
+            <h2>Next Steps & Resources</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>What You Have Now:</h3>
+                    <ul>
+                        <li>Draft assignment for your course</li>
+                        <li>Design template to refine it</li>
+                        <li>Inside Airbnb as a model</li>
+                        <li>Peer feedback and ideas</li>
+                        <li>SAIL framework lens</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Resources I'll Send:</h3>
+                    <ul>
+                        <li>Dataset links by discipline</li>
+                        <li>Sample rubric for SAIL assessment</li>
+                        <li>Student prompt examples</li>
+                        <li>Competition guide template</li>
+                        <li>Office hours scheduling link</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 40px;">
+                <h3 style="color: white;">🎯 Pilot Opportunity</h3>
+                <p style="font-size: 1.3em;">First 5 faculty to pilot a SAIL-designed assignment next semester:</p>
+                <ul style="margin-top: 15px; font-size: 1.2em;">
+                    <li>Co-author case study for AACSB publication</li>
+                    <li>Present at next SAIL Fridays</li>
+                    <li>Featured in Sawyer AI showcase</li>
+                </ul>
+            </div>
+
+            <p style="font-size: 1.3em; margin-top: 40px; text-align: center;">Contact: <strong>harslan@suffolk.edu</strong> • SAIL: <strong>sites.suffolk.edu/sail</strong></p>
+        </div>
+
+        <!-- Slide 16: Final Thoughts -->
+        <div class="slide">
+            <h2>The Real Takeaway</h2>
+            
+            <div style="text-align: center; margin: 60px 0;">
+                <p style="font-size: 2em; color: #2c5282; line-height: 1.5;">
+                    <strong>Multiple tools,<br>One destination:</strong>
+                </p>
+                <p style="font-size: 2.5em; color: #667eea; margin-top: 30px; font-weight: bold;">
+                    Critical thinking through<br>good question design
+                </p>
+            </div>
+
+            <div class="emphasis" style="margin-top: 50px;">
+                Solomon used Python. Others used AI. Both demonstrated SAIL because the question demanded it. That's the power of authentic complexity in learning design—and it's something you already know how to create.
+            </div>
+
+            <p style="font-size: 1.4em; margin-top: 50px; text-align: center; color: #718096;">
+                <em>This isn't just pedagogy—it's career preparation.</em>
+            </p>
+        </div>
+    </div>
+
+    <div class="timer" id="timer">20:00</div>
+
+    <div class="navigation">
+        <button id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <span class="slide-number">
+            <span id="currentSlide">1</span> / <span id="totalSlides">16</span>
+        </span>
+        <button id="nextBtn" onclick="changeSlide(1)">Next →</button>
+        <button onclick="startTimer()" style="background: #e53e3e; margin-left: 20px;">Start Timer</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide + 1;
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+        
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+        
+        // Timer functionality
+        let timerInterval;
+        let timeLeft = 1200; // 20 minutes in seconds
+        
+        function startTimer() {
+            const timerElement = document.getElementById('timer');
+            timerElement.classList.add('active');
+            
+            clearInterval(timerInterval);
+            timeLeft = 1200;
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.style.background = '#38a169';
+                    timerElement.textContent = "Time's Up!";
+                } else if (timeLeft <= 120) {
+                    timerElement.style.background = '#e53e3e';
+                } else if (timeLeft <= 300) {
+                    timerElement.style.background = '#f39c12';
+                }
+            }, 1000);
+        }
+        
+        showSlide(0);
+    </script>
+</body>
+</html>
